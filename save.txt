@@ -1,0 +1,52 @@
+ <audio controls style="display:none;"></audio>
+                <button class="play-btn" type="button">play</button>
+                <!-- Create Audio Progress Bar -->
+                <div class="progress-indicator">
+                    <span class="current-time">0:00</span>
+                    <input type="range" max="100" value="0" class="progress-bar">
+                    <span class="duration">0:00</span>
+                </div>
+                <div class="volume-bar">
+                    <input type="range" min="0" max="2" step="0.01" value="${this.volume}" class="volume-field">
+                </div>
+
+
+
+                <div class="custom-audio-player">
+
+                <audio controls style="display:none;"></audio>
+
+                <!-- ------------------------------------------ -->
+                <!-- Button - Play / Stop  -->
+                <!-- ------------------------------------------ -->
+                <button class="play-btn" type="button">play</button>
+
+                <!-- ------------------------------------------ -->
+                <!-- Audio Progress Bar -->
+                <!-- ------------------------------------------ -->
+                <div class="progress-indicator">
+                    <span class="current-time">0:00</span>
+                    <input type="range" max="100" value="0" class="progress-bar">
+                    <span class="duration">0:00</span>
+                </div>
+
+                <!-- ------------------------------------------ -->
+                <!-- Volume Range -->
+                <!-- ------------------------------------------ -->
+                <div class="volume-bar">
+                    <input type="range" min="0" max="2" step="0.01" value="${this.volume}" class="volume-field">
+                </div>
+
+                <!-- ------------------------------------------ -->
+                <!-- Download -->
+                <!-- ------------------------------------------ -->
+
+                <!-- ------------------------------------------ -->
+                <!-- Audio Speed -->
+                <!-- ------------------------------------------ -->
+                <button class="btn-speed-audio">Speed</button>
+
+            </div>
+                
+
+                  //   https://blog.logrocket.com/creating-custom-css-range-slider-javascript-upgrades/

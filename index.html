@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Custom Audio Player</title>
+</head>
+
+<body>
+
+    <!-- ------------------------------------------------------- -->
+    <!-- Test Layout -->
+    <!-- ------------------------------------------------------- -->
+
+    
+    <div class="info-container">
+
+        <div class="red-header"> Google Native Audio Player 👎 </div>
+    
+        <audio preload="metadata" controls>
+            <source src="crazy-pop-violine.mp3">
+        </audio>
+
+         <audio preload="none" controls>
+            <source src="blamless.mp3">
+        </audio>
+
+        <br><br>
+
+        <button>
+            Hallo
+        </button>
+
+        <!-- <audio preload="none" controls>
+            <source src="Charlie Simpson - I See You (Official Video).mp3">
+        </audio>
+
+        <audio preload="none" controls>
+            <source src="The Box (VIOLIN VERSION) DSharp x Ezinma _ Roddy Ricch.mp3">
+        </audio>  -->
+
+
+    </div>
+
+    <div class="info-container">
+
+        <div class="green-header"> Custom Audio Player 🤤 </div>
+
+
+        <audio-player src="crazy-pop-violine.mp3"  title="Marko Track 1" ></audio-player>
+
+
+        <audio-player src="blamless.mp3" title="Marko Tack 2"></audio-player>
+
+        <audio-player src="The Box (VIOLIN VERSION) DSharp x Ezinma _ Roddy Ricch.mp3" title="Marko Tack 3"></audio-player>
+
+
+        <!-- <audio-player title="Marko Tack 3"></audio-player> -->
+
+
+    </div>
+
+    
+
+
+    <!-- <p>Charli Simpson - Audio Player </p>
+    <br>
+
+    <audio-player src="blamless.mp3"></audio-player>
+ -->
+
+
+    
+    
+    
+    <!-- ------------------------------------------------------- -->
+    <!-- JS Bindings    -->
+    <!-- ------------------------------------------------------- -->
+    <script src="js.js"></script>
+
+</body>
+</html>
