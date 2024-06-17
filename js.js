@@ -145,6 +145,8 @@
                 this.progressBar.max = this.audio.duration;
                 this.durationEl.textContent = this.getTimeString(this.audio.duration);
                 this.updateAudioTime();
+  
+                this.setAudioSpeed();
 
                 // calc seconds to mins & secs 
                 // const mins = parseInt( `${ (this.duration / 60) % 60} , 10`)
@@ -166,7 +168,7 @@
                 this.playing = false;
                 
                 // change img src of button 
-                this.playPauseBtn.querySelector("img").setAttribute("src", "cross.png" )
+                this.playPauseBtn.querySelector("img").setAttribute("src", "media/cross.png" )
                
                 // change button bg-color 
                 this.playPauseBtn.classList.remove('play-btn');
@@ -179,7 +181,8 @@
                 this.playing = false;
                
                 // change img src of button 
-                this.playPauseBtn.querySelector("img").setAttribute("src", "cross.png" )
+                this.playPauseBtn.querySelector("img").setAttribute("src", "media/cross.png" )
+
 
                 // change button bg-color 
                 this.playPauseBtn.classList.remove('play-btn');
@@ -187,18 +190,18 @@
 
               }, false);
               
-              this.audio.addEventListener('play', () => {
+            this.audio.addEventListener('play', () => {
 
                 this.playing = true;
                 
                 // change img src of button 
-                this.playPauseBtn.querySelector("img").setAttribute("src", "emoji-correct.png" )
+                this.playPauseBtn.querySelector("img").setAttribute("src", "media/emoji-correct.png" )
 
                 // change button bg-color 
                 this.playPauseBtn.classList.remove('pause-btn');
                 this.playPauseBtn.classList.add('play-btn');
 
-              }, false);
+            }, false);
 
      
            
@@ -218,6 +221,50 @@
 
 
         }
+
+        /* ----------------------------------------------------- */
+        /* Get Checked Radio Index 
+        /* ----------------------------------------------------- */
+
+        getCheckedRadioIndex( ) {
+
+            for( let i=0; i < this.speedInputs.length; i++ ) {
+
+                if( this.speedInputs[i].checked == true ) {
+                    return i;
+                }
+            }
+            
+            return -1;
+        }
+
+
+        /* ----------------------------------------------------- */
+        /* Update Audio Speed 
+        /* ----------------------------------------------------- */
+        setAudioSpeed() {
+
+           console.log( "[setAudioSpeed] Label Index = " +  this.getCheckedRadioIndex() )
+
+           // check normal speed mode 
+           if( this.speedInputs[ this.getCheckedRadioIndex() ].getAttribute("value") === "" ) {
+
+            this.speedAudioInfo.classList.remove("speed-info")
+
+           } else {
+
+            this.speedAudioInfo.setAttribute( "class" , "speed-info" ) 
+            this.speedAudioInfo.innerText = this.speedInputs[ this.getCheckedRadioIndex() ].getAttribute("value");
+           
+           }
+           
+          
+        }
+
+      
+        /* ----------------------------------------------------- */
+        /* Update Label Click
+        /* ----------------------------------------------------- */
 
         addLabelClickListeners() {
 
@@ -252,8 +299,7 @@
             
         }
 
-     
-
+    
         /* ----------------------------------------------------- */
         /* Time Style  
         /* ----------------------------------------------------- */
@@ -272,13 +318,13 @@
 
             this.volume = Number(this.volumeBar.value);
       
-            if (Number(this.volume) > 1) {
-                this.volumeBar.parentNode.className = 'volume-bar over';
-            } else if (Number(this.volume) > 0) {
-                this.volumeBar.parentNode.className = 'volume-bar half';
-            } else {
-                this.volumeBar.parentNode.className = 'volume-bar';
-            }
+            // if (Number(this.volume) > 1) {
+            //     this.volumeBar.parentNode.className = 'volume-bar over';
+            // } else if (Number(this.volume) > 0) {
+            //     this.volumeBar.parentNode.className = 'volume-bar half';
+            // } else {
+            //     this.volumeBar.parentNode.className = 'volume-bar';
+            // }
             
             if (this.gainNode) {
                 this.gainNode.gain.value = this.volume;
@@ -326,97 +372,81 @@
 
                     padding: .6em;
 
-                    display:inline-flex;
+                    display:flex;
                     align-items:center;
+                    justify-content:space-between;
                     column-gap:.6em;
                 
                     background-color: #f1f3f4;
 
                     border-radius: .4em;
-
                     
+                }
+
+
+                /* ------------------------------------------------------------- */
+                /* Info Audio Container 
+                /* ------------------------------------------------------------- */
+
+                .info-audio-container {
+
+                    width:100%;
+
+                    display:flex;
+                    align-items:center;
+                   
+                    column-gap: .6em;
+                }
+
+                /* ---------------------------------------- */
+                /* Progress Indicator & Progressbar  
+                /* ---------------------------------------- */
+
+                .progress-indicator {
+
+                    width:100%;
+
+                    display:grid;
+                    row-gap:.6em;
+                }
+
+                .info-progress-bar {
+
+                    padding-left:3px;
+
+                    display:flex;
+                    align-items:center;
+                    column-gap: .3em;
                 }
 
                 .duration { font-weight:bold; }
 
+                .speed-info {
 
-                /* ---------------------------------------- */
-                /* Buttons 
-                /* ---------------------------------------- */
+                    height:1.5em;
+                    padding: 0em .4em;
+                    margin-bottom: 2px;
+                    margin-left: 4px;
 
-            
-                button {
-
-                    position:realtive;
-                    top:0;
-                   
-                    appearance : none;
-                    border:none;
-                    outline:none;
-
-                    border-radius: .4em;
-
-                    min-width: 48px;
-                    min-height: 48px;
-
-                    max-width: 48px;
-                    max-height: 48px;
+                    font-size: .9em;
 
                     display:flex;
                     align-items:center;
                     justify-content:center;
 
-                    cursor: pointer;
-
-                }
+                    color: #404040;
+                    background-color: #DEDEDE;
+                    
+                    border-radius:.2em;
                 
-                .play-btn {
-                    background-color: #FF8E8E;
-                }
-
-                .pause-btn {
-                    background-color:#f1f3f4;
-                }
-
-                .img-action { height: 1.5em }
-
-
-                .sets-btn {
-
-                    position: realtive;
-                    top:0;
-                    background-color: grey;
-
-                  
-                }
-
-
-                .speed-audio-info {
-                    color:red;
-                    padding-left: .3em;
-                    font-size:.9em;
                 }
 
                 /* ---------------------------------------- */
-                /* Slider Volume Bar  
-                /* ---------------------------------------- */
-                .volume-bar,
-                .slider-vertical {
-
-                    position:relative;
-                    bottom:3em;
-                    left: .2em;
-                    transform: rotate(-90deg);
-
-                }
-
-           
-
-                /* ---------------------------------------- */
-                /* Slider Progress Bar  
+                /*  Progress Bar  
                 /* ---------------------------------------- */
 
                 .progress-bar {
+                
                 
                    -webkit-appearance: none;
 
@@ -427,7 +457,6 @@
 
                     cursor: pointer;
 
-                   
                 } 
 
                 ::-webkit-slider-thumb {
@@ -452,11 +481,68 @@
                     transition: .2s ease-in-out;
                 }
 
-               
+
+
+
+                /* ------------------------------------------------------------- */
+                /* Sets Audio Container 
+                /* ------------------------------------------------------------- */
+
+                .sets-audio-container {
+
+                    display:flex;
+                    align-items:center;
+                    column-gap: .3em;
+                }
+
+                /* ---------------------------------------- */
+                /* Volume Bar 
+                /* ---------------------------------------- */
+
+                .volume-bar {
+                
+                    appearance: none;
+
+                    position:relative;
+                    bottom:3em;
+
+                    width:100px;
+                    height:10px;
+
+                    background-color:#c1c2c3;
+                    border-radius:.6em;
+
+                    transform: rotate(-90deg); 
+
+                    cursor: pointer;
+
+                } 
+
+                /*.volume-bar::-webkit-slider-thumb {
+
+                    
+
+                    height: 25px;
+                    width: 25px;
+                    background-color: #f50;
+                    border-radius: 50%;
+                    border: none;
+                    transition: .2s ease-in-out;
+                }
+              
+                .volume-bar::-moz-range-thumb {
+
+                    height: 15px;
+                    width: 15px;
+                    background-color: #f50;
+                    border-radius: 50%;
+                    border: none;
+                    transition: .2s ease-in-out;
+                } */
 
               
 
-
+        
                 .fangen {
                 
                     position: relative;
@@ -560,24 +646,61 @@
                 
                 }
 
+
+
+                /* ------------------------------------------------------------- */
+                /* Defaults
+                /* ------------------------------------------------------------- */
+
+
+                /* ---------------------------------------- */
+                /* Buttons 
+                /* ---------------------------------------- */
+
+                .def-btn-audio {
+
+                    position:realtive;
+                    top:0;
+                   
+                    appearance : none;
+                    border:none;
+                    outline:none;
+
+                    border-radius: .4em;
+
+                    min-width: 48px;
+                    min-height: 48px;
+
+                    max-width: 48px;
+                    max-height: 48px;
+
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+
+                    cursor: pointer;
+                
+                }
+    
+                .play-btn {
+                    background-color: #FF8E8E;
+                }
+
+                .pause-btn {
+                    background-color:#f1f3f4;
+                }
+
+                .img-action { height: 1.5em }
+
+
+                .sets-btn {
+
+                    background-color: grey;
+                  
+                }
+
+
              
-
-
-               
-
-                /* ---------------------------------------- */
-                /* Slider Audio ( + Firefox Fix )
-                /* ---------------------------------------- */
-
-                /* ---------------------------------------- */
-                /* Download Panel
-                /* ---------------------------------------- */
-
-                /* ---------------------------------------- */
-                /* Audio Speed Panel
-                /* ---------------------------------------- */
-
-               
 
             </style>
             `;
@@ -589,117 +712,136 @@
         /* ----------------------------------------------------- */
         render() {
 
+            
             this.shadowRoot.innerHTML = `
             ${this.style()}
 
-            <figure class="audio-player">
+            <div class="audio-player">
 
-                <figcaption class="audio-name" style="display:none;"></figcaption>
-
-                <audio></audio>
-
+                <audio style="display:none;"></audio>
+                    
+               
                 <!-- ------------------------------------------------------- -->
-                <!-- Button - Play / Stop -->
+                <!-- Info Audio Container -->
                 <!-- ------------------------------------------------------- -->
-                <button class="pause-btn" type="button">
 
-                    <img src="cross.png" class="img-action" alt="img">
+                <div class="info-audio-container">
+               
 
-                </button>
-
-                <div class="progress-indicator">
-                    <span class="current-time">0:00</span>
-                    <span> / </span>
-                    <span class="duration">0:00</span>
-                    <span class="speed-audio-info">x</span>
-                    <input type="range" max="100" value="0" class="progress-bar">
-                </div>
-
-
-                <!-- ------------------------------------------------------- -->
-                <!-- Speed Selection -->
-                <!-- ------------------------------------------------------- -->
-                <button class="sets-btn">
-
-                   
                     <!-- ------------------------------------------------------- -->
-                    <!-- Volume Bar -->
+                    <!-- Button - Play/Stop -->
                     <!-- ------------------------------------------------------- -->
-                    <div class="volume-bar slider-vertical">
-                        <input type="range" min="0" max="2" step="0.01" value="${this.volume}" class="volume-field">
+                    <button class="def-btn-audio pause-btn" type="button">
+                        <img src="media/cross.png" class="img-action" alt="img">
+                    </button>
+
+                    <!-- ------------------------------------------------------- -->
+                    <!-- Progress Indicator & Progress Bar                       -->
+                    <!-- ------------------------------------------------------- -->
+                    <div class="progress-indicator">
+
+                        <div class="info-progress-bar">
+                            <div class="current-time">0:00</div>
+                            <div> / </div>
+                            <div class="duration">0:00</div>
+                            <div class="speed-info">-</div> 
+                        </div>
+                    
+                        <input type="range" max="100" value="0" class="progress-bar">
+                        
                     </div>
 
-                </button>
+                </div>
 
                 <!-- ------------------------------------------------------- -->
-                <!-- Download Selection -->
+                <!-- Sets Audio Container -->
                 <!-- ------------------------------------------------------- -->
-                <button class="sets-btn" id="more-options-btn">
                 
-                    <img src="" alt="img">
+                <div class="sets-audio-container">
 
-                    <div class="fangen">
+                    <!-- ------------------------------------------------------- -->
+                    <!-- Volume Bar - Button  -->
+                    <!-- ------------------------------------------------------- -->
 
-                        <!-- ------------------------------------------ -->
-                        <!-- More Options -->
-                        <!-- ------------------------------------------ -->
-                        <div class="more-audio-options-container">
+                    <button class="def-btn-audio sets-btn">
+            
+                        <input type="range" min="0" max="2" step="0.01" value="${this.volume}" class="volume-bar"> 
+                                        
+
+                    </button>
+
+                    <!-- ------------------------------------------------------- -->
+                    <!-- More Audio Options - Button -->
+                    <!-- ------------------------------------------------------- -->
+
+                    <button class="def-btn-audio sets-btn" id="more-options-btn">
+                    
+                        <img src="" alt="img">
+
+                        <div class="fangen">
+
+                            <!-- ------------------------------------------ -->
+                            <!-- More Options -->
+                            <!-- ------------------------------------------ -->
+                            <div class="more-audio-options-container">
 
 
-                            <div class="audio-download">
-                                Download
+                                <div class="audio-download">
+                                    Download
+                                </div>
+
+                                <input id="speed-0-5" type="radio" name="audio-speed" value="x 0,50">
+                                <label for="speed-0-5">
+                                x 0,50 
+                                </label>
+
+                                <input checked id="speed-0-75" type="radio" name="audio-speed" value="x 0,75">
+                                <label for="speed-0-75">
+                                    x 0,75 
+                                </label>
+
+                                <input id="speed-1" type="radio" name="audio-speed" value="">
+                                <label for="speed-1">
+                                    Normal ( x 1 )
+                                </label>
+
+                                <input id="speed-1-25" type="radio" name="audio-speed" value="x 1,25">
+                                <label for="speed-1-25">
+                                    x 1,25 
+                                </label>
+
+                                <input id="speed-1-50" type="radio" name="audio-speed" value="x 1,50">
+                                <label for="speed-1-50">
+                                    x 1,50 
+                                </label>
+
+                                <input id="speed-1-75" type="radio" name="audio-speed" value="x 1,75">
+                                <label for="speed-1-75">
+                                    x 1,75 
+                                </label>
+
+                                <input id="speed-2" type="radio" name="audio-speed" value="x 2,0">
+                                <label for="speed-2">
+                                    x 2,0 
+                                </label>
+
                             </div>
-
-                            <input id="speed-0-5" type="radio" name="audio-speed" value="x 0,50">
-                            <label for="speed-0-5">
-                            x 0,50 
-                            </label>
-
-                            <input id="speed-0-75" type="radio" name="audio-speed" value="x 0,75">
-                            <label for="speed-0-75">
-                                x 0,75 
-                            </label>
-
-                            <input checked id="speed-1" type="radio" name="audio-speed" value="">
-                            <label for="speed-1">
-                                Normal ( x 1 )
-                            </label>
-
-                            <input id="speed-1-25" type="radio" name="audio-speed" value="x 1,25">
-                            <label for="speed-1-25">
-                                x 1,25 
-                            </label>
-
-                            <input id="speed-1-50" type="radio" name="audio-speed" value="x 1,50">
-                            <label for="speed-1-50">
-                                x 1,50 
-                            </label>
-
-                            <input id="speed-1-75" type="radio" name="audio-speed" value="x 1,75">
-                            <label for="speed-1-75">
-                                x 1,75 
-                            </label>
-
-                            <input id="speed-2" type="radio" name="audio-speed" value="x 2,0">
-                            <label for="speed-2">
-                                x 2,0 
-                            </label>
 
                         </div>
 
-                    </div>
+                    </button>
 
-                </button>
-
-                
-            </figure>
+                </div>
+             
+ 
+            </div>
 
             `;
 
             this.audio = this.shadowRoot.querySelector('audio');
             this.playPauseBtn = this.shadowRoot.querySelector('.pause-btn')
-            this.titleElement = this.shadowRoot.querySelector('.audio-name');
-            this.volumeBar = this.shadowRoot.querySelector('.volume-field')
+            this.titleElement = this.shadowRoot.querySelector('audio');
+            this.volumeBar = this.shadowRoot.querySelector('.volume-bar')
             
            // <button class="download-btn">
                         //     Download
@@ -708,17 +850,27 @@
             // this.downloadAudio = this.shadowRoot.querySelector(".download-audio-btn");
             // this.speedAudio = this.shadowRoot.querySelector(".speed-audio-btn");
 
+            /* ------------------------------------------- */
+            /* Progress Indicator & Progressbar
+            /* ------------------------------------------- */
+
             this.progressIndicator = this.shadowRoot.querySelector('.progress-indicator');
             this.currentTimeEl = this.progressIndicator.querySelector('.current-time')
             this.durationEl = this.progressIndicator.querySelector('.duration')
+            this.speedAudioInfo = this.shadowRoot.querySelector(".speed-info");
             this.progressBar = this.progressIndicator.querySelector('.progress-bar')
+
+           
+            /* ------------------------------------------- */
+            /* More Option Audio
+            /* ------------------------------------------- */
 
             this.moreAudioOptionsBtn = this.shadowRoot.getElementById("more-options-btn");
             this.moreAudioOptionContainer = this.shadowRoot.querySelector(".more-audio-options-container");
-            
             this.speedInputs = this.shadowRoot.querySelectorAll("input[name='audio-speed']");
             this.speedLabels = this.shadowRoot.querySelectorAll(".more-audio-options-container > label")
-            this.speedAudioInfo = this.shadowRoot.querySelector(".speed-audio-info");
+            
+           
 
             // get Attribute 
             this.titleElement.textContent = this.attributes.getNamedItem('src')
