@@ -112,6 +112,40 @@
         /* ----------------------------------------------------- */
         attachEvents() {
 
+            // this.downloadDiv.addEventListener( 'click', ()=> {
+
+            //     this.audio.download;
+            // })
+
+            this.volumeBtn.addEventListener( 'click' , ()=> {
+
+                this.volumeBar.style.display = "block";
+                this.volumeBtn.querySelector("img").style.display = "none";
+            })
+
+        
+            this.volumeBar.addEventListener( 'focusout' , ()=> {
+
+                this.volumeBar.style.display = "none";
+
+                // if( this.volume == 0 ) {
+
+                //     console.log("this volume = " + this.volume )
+                //     this.volumeBtn.querySelector("img").style.display = "none";
+    
+                // } else {
+
+                //     this.volumeBtn.querySelector("img").style.display = "block";
+    
+                // }
+
+                this.volumeBtn.querySelector("img").style.display = "block";
+            
+            })
+
+       
+
+
             this.moreAudioOptionsBtn.addEventListener( 'click' , ()=> {
 
 
@@ -143,19 +177,17 @@
             // to get audio duration information we must listen to the load metadata event on the audio tag 
             this.audio.addEventListener( 'loadedmetadata' , ()=> {
 
-                // set duration & current Time on our Element  
+                /* -------------------------------------------- */
+                /* Set Duration & Current Time 
+                /* -------------------------------------------- */
                 this.progressBar.max = this.audio.duration;
                 this.durationEl.textContent = this.getTimeString(this.audio.duration);
                 this.updateAudioTime();
-  
-                this.setAudioSpeed();
 
-                // calc seconds to mins & secs 
-                // const mins = parseInt( `${ (this.duration / 60) % 60} , 10`)
-                // const secs = `${parseInt( `${this.duration % 60} , 10`)}`.padStart(2,'0')
-               
-                // Set on View Element - duration 
-                // this.durationEl.textContent = `${mins}:${secs}`;
+                /* -------------------------------------------- */
+                /* Set Audio Speed ( default ) 
+                /* -------------------------------------------- */
+                this.setAudioSpeed( this.getCheckedRadioIndex( ) );
 
             })
 
@@ -242,25 +274,83 @@
 
 
         /* ----------------------------------------------------- */
-        /* Update Audio Speed 
+        /* Set - Audio Speed
         /* ----------------------------------------------------- */
-        setAudioSpeed() {
+        setAudioSpeed( index ) {
 
-           console.log( "[setAudioSpeed] Label Index = " +  this.getCheckedRadioIndex() )
+           console.log( "[setAudioSpeed] Index clicked = " +  index )
+
+           /* ------------------------------------------------------ */
+           /* Set & Update View 
+           /* ------------------------------------------------------ */
+           this.speedInputs[ index ].checked = true;
+
+          // unshown normal speed 
+          if( this.speedInputs[ index ].getAttribute("value") === "1.0" ) {
+
+            // delete show speed info if its was before
+            if( this.speedAudioInfo.classList.contains("show-speed-info") ) {
+                this.speedAudioInfo.classList.remove("show-speed-info");
+            }
+            // set empty for unshown
+            this.speedAudioInfo.innerText = "";
+            this.setPlaybackRate(1.0);
+
+          } else {
+
+            // add if hadnt class name , if u switch other than default it 
+            // dont must set again 
+            if( !this.speedAudioInfo.classList.contains("show-speed-info") ) {
+                this.speedAudioInfo.classList.add("show-speed-info");
+            }
+           
+            this.speedAudioInfo.innerText = "x " + this.speedInputs[ index ].getAttribute("value");
+
+            // Warning - Value must be 1.0 , 1.25 on this way 
+            this.setPlaybackRate( parseFloat( this.speedInputs[ index ].getAttribute("value") ) );
+          }
+
+           
+
+          
+
+        //    console.log( "[setAudioSpeed] Index setted = " +  this.getCheckedRadioIndex() )
+
+          
+          
+
 
            // check normal speed mode 
-           if( this.speedInputs[ this.getCheckedRadioIndex() ].getAttribute("value") === "" ) {
+        //    if( this.speedInputs[ this.getCheckedRadioIndex() ].getAttribute("value") === "" ) {
 
-            this.speedAudioInfo.classList.remove("speed-info")
+        //     this.speedAudioInfo.classList.remove("speed-info")
+        //     this.setPlaybackRate(1.0);
 
-           } else {
+        //    } else {
 
-            this.speedAudioInfo.setAttribute( "class" , "speed-info" ) 
-            this.speedAudioInfo.innerText = this.speedInputs[ this.getCheckedRadioIndex() ].getAttribute("value");
-           
-           }
+        //     console.log(" SET = " + this.speedInputs[ this.getCheckedRadioIndex() ].getAttribute("value"))
+            
+        //     this.speedAudioInfo.setAttribute( "class" , "speed-info" ) 
+            
+
+
+        //     this.setPlaybackRate(2.0);
+
+           //}
            
           
+        }
+
+        /* ----------------------------------------------------- */
+        /* Set Playback Rate 
+        /* ----------------------------------------------------- */
+
+        setPlaybackRate( rate ) {
+            
+            console.log("[setPlaybackRate] = " + rate )
+
+            this.audio.playbackRate = rate;
+
         }
 
       
@@ -274,10 +364,12 @@
 
                 this.speedLabels[i].addEventListener( "click" , ()=> {
 
-                    this.speedInputs[i].checked = true;
-
-                    this.speedAudioInfo.innerText = this.speedInputs[i].getAttribute("value");
-                } )
+                    /* ------------------------------------------ */
+                    /* Set - Audio Speed 
+                    /* ------------------------------------------ */
+                    this.setAudioSpeed( i )
+ 
+                })
 
             }
             
@@ -320,6 +412,8 @@
 
             this.volume = Number(this.volumeBar.value);
       
+            // console.log("volume===" + this.volume)
+           
             // if (Number(this.volume) > 1) {
             //     this.volumeBar.parentNode.className = 'volume-bar over';
             // } else if (Number(this.volume) > 0) {
@@ -435,12 +529,16 @@
                     display:flex;
                     align-items:center;
                     justify-content:center;
+ 
+                    border-radius:.2em;
+                
+                }
+
+                .show-speed-info {
 
                     color: #404040;
                     background-color: #DEDEDE;
-                    
-                    border-radius:.2em;
-                
+
                 }
 
                 /* ---------------------------------------- */
@@ -499,8 +597,17 @@
                 }
 
                 /* ---------------------------------------- */
-                /* Volume Bar 
+                /* Volume Bar  <!-- 
+                this.volumeBtn = this.shadowRoot.getElementById("volume-bar-btn");
+                this.volumeBar  -->
                 /* ---------------------------------------- */
+
+
+                #volume-bar-btn > img {
+
+                    height: 1.3em;
+                    padding-left: 2px;
+                }
 
                 .volume-bar {
                 
@@ -518,6 +625,8 @@
                     transform: rotate(-90deg); 
 
                     cursor: pointer;
+
+                    display: none;
 
                 } 
 
@@ -545,17 +654,10 @@
 
               
 
-        
-                .fangen {
-                
-                    position: relative;
-                    top:0;
+                #more-options-btn > img {
 
-                    width: 3em;
-                    height:3em;
-
-                    background-color: green;
-
+                    height: 1.3em;
+                    width: 1.3em;
                 }
              
                 .more-audio-options-container.active {
@@ -591,15 +693,18 @@
 
                     border-radius: .4em;
 
-                    
-
-
+                
                 }
 
                 .more-audio-options-container > label {
 
                     border-bottom: 1px solid #CBCBCB; 
 
+                }
+
+                .more-audio-options-container > label:hover {
+
+                    background-color:grey;
                 }
 
                 input:checked + label { 
@@ -645,8 +750,11 @@
                     color:#F7F7F7;
 
                     background-image: linear-gradient(to right, #434343 0%, black 100%);
+
+                    transition: all .4s ease;
                    
                 }
+
 
                 .audio-download > img {
 
@@ -771,7 +879,9 @@
                     <!-- Volume Bar - Button  -->
                     <!-- ------------------------------------------------------- -->
 
-                    <button class="def-btn-audio sets-btn">
+                    <button class="def-btn-audio sets-btn" id="volume-bar-btn">
+
+                        <img src="media/volumen.png" alt="img">
             
                         <input type="range" min="0" max="2" step="0.01" value="${this.volume}" class="volume-bar"> 
                                         
@@ -784,9 +894,9 @@
 
                     <button class="def-btn-audio sets-btn" id="more-options-btn">
                     
-                        <img src="" alt="img">
+                        <img src="media/punkte.png" alt="img">
 
-                        <div class="fangen">
+                        
 
                             <!-- ------------------------------------------ -->
                             <!-- More Options -->
@@ -794,51 +904,56 @@
                             <div class="more-audio-options-container">
 
 
-                                <div class="audio-download">
+                                <div class="audio-download" id="download-audio-src">
                                 
                                     <img src="media/download-icon.png" alt="img">
                                     <div>Download</div>
 
                                 </div>
 
-                                <input id="speed-0-5" type="radio" name="audio-speed" value="x 0,50">
+                                <input id="speed-0-5" type="radio" name="audio-speed" value="0.50">
                                 <label for="speed-0-5">
                                 x 0,50 
                                 </label>
 
-                                <input checked id="speed-0-75" type="radio" name="audio-speed" value="x 0,75">
+                                <input id="speed-0-75" type="radio" name="audio-speed" value="0.75">
                                 <label for="speed-0-75">
                                     x 0,75 
                                 </label>
 
-                                <input id="speed-1" type="radio" name="audio-speed" value="">
+                                <input checked id="speed-1" type="radio" name="audio-speed" value="1.0">
                                 <label for="speed-1">
                                     Normal ( x 1 )
                                 </label>
 
-                                <input id="speed-1-25" type="radio" name="audio-speed" value="x 1,25">
+                                <input id="speed-1-25" type="radio" name="audio-speed" value="1.25">
                                 <label for="speed-1-25">
                                     x 1,25 
                                 </label>
 
-                                <input id="speed-1-50" type="radio" name="audio-speed" value="x 1,50">
+                                <input id="speed-1-50" type="radio" name="audio-speed" value="1.50">
                                 <label for="speed-1-50">
                                     x 1,50 
                                 </label>
 
-                                <input id="speed-1-75" type="radio" name="audio-speed" value="x 1,75">
+                                <input id="speed-1-75" type="radio" name="audio-speed" value="1.75">
                                 <label for="speed-1-75">
                                     x 1,75 
                                 </label>
 
-                                <input id="speed-2" type="radio" name="audio-speed" value="x 2,0">
+                                <input id="speed-2" type="radio" name="audio-speed" value="2.0">
                                 <label for="speed-2">
                                     x 2,0 
                                 </label>
 
+                                <input id="speed-2-50" type="radio" name="audio-speed" value="2.50">
+                                <label for="speed-2-50">
+                                    x 2,50 
+                                </label>
+
                             </div>
 
-                        </div>
+                        
 
                     </button>
 
@@ -852,7 +967,7 @@
             this.audio = this.shadowRoot.querySelector('audio');
             this.playPauseBtn = this.shadowRoot.querySelector('.pause-btn')
             this.titleElement = this.shadowRoot.querySelector('audio');
-            this.volumeBar = this.shadowRoot.querySelector('.volume-bar')
+           
             
            // <button class="download-btn">
                         //     Download
@@ -875,6 +990,11 @@
             /* ------------------------------------------- */
             /* More Option Audio
             /* ------------------------------------------- */
+
+            this.volumeBtn = this.shadowRoot.getElementById("volume-bar-btn");
+            this.volumeBar = this.shadowRoot.querySelector('.volume-bar')
+
+            this.downloadDiv = this.shadowRoot.getElementById("download-audio-src");
 
             this.moreAudioOptionsBtn = this.shadowRoot.getElementById("more-options-btn");
             this.moreAudioOptionContainer = this.shadowRoot.querySelector(".more-audio-options-container");
