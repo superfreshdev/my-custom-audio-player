@@ -1,6 +1,8 @@
 {
     // https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/playbackRate
 
+  
+
     class AudioPlayer extends HTMLElement {
 
         playing = false;
@@ -356,7 +358,7 @@
             this.progressBar.value = this.audio.currentTime;
             this.currentTimeEl.textContent = this.getTimeString(this.audio.currentTime);
         }
-        
+       
         style() {
             return `
             <style>
@@ -367,7 +369,7 @@
 
                 .audio-player {
 
-                    position:realtive;
+                    position:relative;
                     top:0;
 
                     padding: .6em;
@@ -447,12 +449,12 @@
 
                 .progress-bar {
                 
-                
                    -webkit-appearance: none;
 
                    width:100%;
                    height:4px;
                    background-color:#c1c2c3;
+
                    border-radius:.6em;
 
                     cursor: pointer;
@@ -462,6 +464,7 @@
                 ::-webkit-slider-thumb {
 
                     -webkit-appearance: none;
+                     
 
                     height: 15px;
                     width: 15px;
@@ -612,7 +615,7 @@
                 
                 .more-audio-options-container > label {
 
-                    height: 3em;
+                    height: 3.3em;
                     padding: 0em .6em;
 
                     display:flex;
@@ -629,12 +632,13 @@
 
                     border-radius: .3em .3em 0em 0em;                    
 
-                    height: 3em;
+                    height: 3.3em;
                     padding: 0em .6em;
                 
                     display:flex;
                     align-items:center;
                     justify-content:center;
+                    column-gap: .6em;
 
                     font-weight:bold;
 
@@ -642,8 +646,12 @@
 
                     background-image: linear-gradient(to right, #434343 0%, black 100%);
                    
+                }
 
-                
+                .audio-download > img {
+
+                    height: 1em;
+                    width: 1.2em;
                 }
 
 
@@ -659,7 +667,7 @@
 
                 .def-btn-audio {
 
-                    position:realtive;
+                    position: relative;
                     top:0;
                    
                     appearance : none;
@@ -747,7 +755,7 @@
                             <div class="speed-info">-</div> 
                         </div>
                     
-                        <input type="range" max="100" value="0" class="progress-bar">
+                        <input type="range" max="100" value="0"  class="progress-bar">
                         
                     </div>
 
@@ -787,7 +795,10 @@
 
 
                                 <div class="audio-download">
-                                    Download
+                                
+                                    <img src="media/download-icon.png" alt="img">
+                                    <div>Download</div>
+
                                 </div>
 
                                 <input id="speed-0-5" type="radio" name="audio-speed" value="x 0,50">
