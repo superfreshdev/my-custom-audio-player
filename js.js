@@ -468,7 +468,7 @@
 
                     height: 15px;
                     width: 15px;
-                    background-color: #f50;
+                    background-color: #404040;
                     border-radius: 50%;
                     border: none;
                     transition: .2s ease-in-out;
