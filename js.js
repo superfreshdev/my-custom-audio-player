@@ -170,7 +170,7 @@
                 this.playing = false;
                 
                 // change img src of button 
-                this.playPauseBtn.querySelector("img").setAttribute("src", "media/cross.png" )
+                this.playPauseBtn.querySelector("img").setAttribute("src", "media/play-taste.png" )
                
                 // change button bg-color 
                 this.playPauseBtn.classList.remove('play-btn');
@@ -183,7 +183,7 @@
                 this.playing = false;
                
                 // change img src of button 
-                this.playPauseBtn.querySelector("img").setAttribute("src", "media/cross.png" )
+                this.playPauseBtn.querySelector("img").setAttribute("src", "media/play-taste.png" )
 
 
                 // change button bg-color 
@@ -197,7 +197,7 @@
                 this.playing = true;
                 
                 // change img src of button 
-                this.playPauseBtn.querySelector("img").setAttribute("src", "media/emoji-correct.png" )
+                this.playPauseBtn.querySelector("img").setAttribute("src", "media/pause.png" )
 
                 // change button bg-color 
                 this.playPauseBtn.classList.remove('pause-btn');
@@ -740,7 +740,7 @@
                     <!-- Button - Play/Stop -->
                     <!-- ------------------------------------------------------- -->
                     <button class="def-btn-audio pause-btn" type="button">
-                        <img src="media/cross.png" class="img-action" alt="img">
+                        <img src="media/play-taste.png" class="img-action" alt="img">
                     </button>
 
                     <!-- ------------------------------------------------------- -->
