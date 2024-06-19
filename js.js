@@ -732,6 +732,15 @@
 
                 } 
 
+                input[type=range]:focus::-webkit-slider-runnable-track {
+                    background: #c1c2c3;
+                    border-radius:.6em;
+                }
+
+                /* --------------------------------------- */
+                /* Thumb - Progresbar 
+                /* --------------------------------------- */
+
                 ::-webkit-slider-thumb {
 
                     -webkit-appearance: none;
@@ -754,6 +763,9 @@
                     border: none;
                     transition: .2s ease-in-out;
                 }
+
+              
+
 
 
                 /* ------------------------------------------------------------- */
