@@ -144,13 +144,11 @@
 
             })
 
-
             /* -------------------------------------------------------- */
             /* Click | Play / Pause - Button
             /* -------------------------------------------------------- */
             this.playPauseBtn.addEventListener( 'click' , this.togglePlay.bind(this), false )
         
-         
             /* -------------------------------------------------------- */
             /* Input | Progress Bar ( update jumping audio time  )
             /* -------------------------------------------------------- */
@@ -223,6 +221,10 @@
             }, false);
 
 
+
+
+
+
             /* -------------------------------------------------------- */
             /* Click | Volume Button 
             /* -------------------------------------------------------- */
@@ -235,7 +237,7 @@
             })
 
             /* -------------------------------------------------------- */
-            /* MouseLeve | Volume Bar 
+            /* MouseLeave | Volume Bar 
             /* -------------------------------------------------------- */
             this.volumeBtn.addEventListener( 'mouseleave' , ()=> {
 
@@ -250,6 +252,8 @@
             /* -------------------------------------------------------- */
             this.volumeBar.addEventListener( 'input' , this.changeVolume.bind(this), false )
        
+
+
             /* -------------------------------------------------------- */
             /* Click | More Audio Options - Button 
             /* -------------------------------------------------------- */
@@ -263,26 +267,14 @@
                 this.addLabelClickListeners()
             })
 
-            // this.linkDownloadAudio.addEventListener( 'click' , ()=> {
-
-
-            //     console.log(" Download clicked " )
-            //     this.moreAudioOptionContainer.classList.remove("active");
-
-            // })
-            
             /* -------------------------------------------------------- */
-            /* Focusout | More Audio Options - Button
+            /* MouseLeave  | More Audio Options - Button
             /* -------------------------------------------------------- */
             this.btnMoreAudioOptions.addEventListener( 'mouseleave' , ()=> {
 
-                console.log(" btnMoreAudioOptions =  loose focus" )
                 this.moreAudioOptionContainer.classList.remove("active");
 
             })
-
-
-           
            
         }
 
@@ -292,20 +284,7 @@
         /* Help Functions 
         /* ------------------------------------------------------------------- */
 
-        /* ----------------------------------------------------- */
-        /* Update Attribute Ressource  
-        /* ----------------------------------------------------- */
-        updateAttributeRessource( domElement , strAttribute ) {
-
-            // at least focus on button + img ( src, class )
-            if(domElement == 'button') {
-
-                console.log("Is Button Baby" + domElement )
-            }
-
-
-        }
-
+       
         /* ----------------------------------------------------- */
         /* Get Checked Radio Index 
         /* ----------------------------------------------------- */
@@ -326,7 +305,7 @@
         /* ----------------------------------------------------- */
         setAudioSpeed( index ) {
 
-        //    console.log( "[setAudioSpeed] Index clicked = " +  index )
+        //  onsole.log( "[setAudioSpeed] Index clicked = " +  index )
 
            /* ------------------------------------------------------ */
            /* Set & Update View 
@@ -363,27 +342,6 @@
         }
 
         /* ----------------------------------------------------- */
-        /* Download File by Fetch API blob
-        /* ----------------------------------------------------- */
-        downloadFile( link , filename ) {
-            
-            fetch(link, { method: "get", mode: "no-cors", referrerPolicy: "no-referrer" })
-            .then((res) => res.blob())
-            .then((res) => {
-        
-                this.linkDownloadAudio.setAttribute( "download", filename )
-
-                const href = URL.createObjectURL.apply(res);
-                this.linkDownloadAudio.href = href;
-                this.linkDownloadAudio.click();
-                URL.revokeObjectURL(href);
-            });
-
-        }
-
-
-
-        /* ----------------------------------------------------- */
         /* Set Playback Rate 
         /* ----------------------------------------------------- */
         setPlaybackRate( rate ) {
@@ -392,10 +350,9 @@
             this.audio.playbackRate = rate;
 
         }
-
       
         /* ----------------------------------------------------- */
-        /* Update Label Click
+        /* Update Audio Speed 
         /* ----------------------------------------------------- */
         addLabelClickListeners() {
 
@@ -403,9 +360,6 @@
 
                 this.speedLabels[i].addEventListener( "click" , ()=> {
 
-                    /* ------------------------------------------ */
-                    /* Set - Audio Speed 
-                    /* ------------------------------------------ */
                     this.setAudioSpeed( i )
  
                 })
@@ -515,16 +469,17 @@
         /* ----------------------------------------------------- */
         seekTo( value ) {
             this.audio.currentTime = value;
-   
         }
 
         /* ----------------------------------------------------- */
         /* Update Audio Time  , time 
         /* ----------------------------------------------------- */
         updateAudioTime() {
+
             this.progressBar.value = this.audio.currentTime;
             this.currentTimeEl.textContent = this.getTimeString(this.audio.currentTime);
 
+            // magix css linear gradient trick to build input range to progress bar 
             this.progressBar.style.background = `linear-gradient(to right, #404040 ${ (this.audio.currentTime / this.audio.duration) * 100 }%, #c1c2c3 ${ (this.audio.currentTime / this.audio.duration) * 100 }%)`;
         }
 
@@ -606,8 +561,6 @@
                     background-color:#E6E6E6;
                 }
 
-              
-
                 /* ---------------------------------------------------------------------- */
                 /* Audio Player 
                 /* ---------------------------------------------------------------------- */
@@ -622,7 +575,6 @@
                     display:grid;
                     grid: 1fr auto / 1fr;
                     
-                   
                     background-color: #f1f3f4;
 
                     border-radius: .4em;
@@ -649,21 +601,12 @@
                     margin-bottom: .4em;
 
                     width:100%;
-
                     
                     color:#707070;
                     background-color: #f1f3f4;
-                    /*background-color: #f1f3f4;
-                    background-color:red;
-                    background-color: #FF8E8E;
-                    background-color:#E6E6E6;
-                    background-color:#F0F0F0;
-                    background-color: #CDCDCD;*/
-
-
+                   
                     border-radius: .4em;
 
-                    /*cursor:grab;*/
                 }
                                 
                 /* ------------------------------------------------------------- */
@@ -766,10 +709,11 @@
                 /* Thumb Effects by Focus / Clicking  */
                 /* --------------------------------------------------- */
 
+                /* Chrome */
                 input[type=range]:focus::-webkit-slider-runnable-track {
                     background: #c1c2c3;
                     border-radius:.6em;
-                }
+                }    
 
                 /* Chrome & Co */
                 input[type="range"]::-webkit-slider-thumb:hover {
@@ -787,24 +731,23 @@
                 /* Firefox */
 
                 input[type="range"]::-moz-range-thumb:hover {
-                    box-shadow: 0 0 0 3px rgba(149, 149, 149  , .8)
+                    box-shadow: 0 0 0 1px rgba(149, 149, 149  , .8)
                 }
                 input[type="range"]:active::-moz-range-thumb {
-                    box-shadow: 0 0 0 5px rgba(149, 149, 149  , 1)
+                    box-shadow: 0 0 0 1px rgba(149, 149, 149  , 1)
                 }
                 input[type="range"]:focus::-moz-range-thumb {
-                    box-shadow: 0 0 0 5px rgba(149, 149, 149  , 1) 
+                    box-shadow: 0 0 0 2px rgba(149, 149, 149  , 1) 
                 }
-
 
                 /* --------------------------------------- */
                 /* Thumb - Progresbar 
                 /* --------------------------------------- */
 
+                /* Chrome & Co  */
                 ::-webkit-slider-thumb {
 
                     -webkit-appearance: none;
-                   
 
                     height: 15px;
                     width: 15px;
@@ -814,6 +757,7 @@
                     transition: .2s ease-in-out;
                 }
               
+                /* Firefox  */
                 ::-moz-range-thumb {
 
                     height: 15px;
@@ -823,10 +767,6 @@
                     border: none;
                     transition: .2s ease-in-out;
                 }
-
-              
-
-
 
                 /* ------------------------------------------------------------- */
                 /* Sets Audio Container 
@@ -1121,8 +1061,6 @@
                 </marquee>
                 -->
 
-            <a href="media/blamless.mp3" download="file">Blameless.mp3</a> 
-
             <div class="audio-handling-container">
 
                 <label class="btn-audio-handling">
@@ -1239,7 +1177,7 @@
 
             
                                 <!-- ------------------------------------------ -->
-                                <!-- Download Audio - Button  https://plainenglish.io/blog/how-to-download-a-file-using-javascript-fec4685c0a22                  -->
+                                <!-- Download Audio - Button                    -->
                                 <!-- ------------------------------------------ -->
 
                                 <a href="" class="download-audio-link" download>
