@@ -805,7 +805,16 @@
                 .btn-volume-value-info {
 
                     font-size: .8em;
-                    padding-left:1px;
+
+                    width: 3.5em;
+                    padding-left: 2px;
+
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+
+                   
+                    
                 }
 
                 /* ---------------------------------------- */
@@ -908,7 +917,7 @@
 
                 .more-audio-options-container {
 
-                    font-size: 16px;
+                    font-size: .9em;
 
                     min-width: 0px;
                     max-height: 0px;
@@ -966,7 +975,7 @@
                 
                 .download-audio-link {
 
-                    height: 2.6em;
+                    height: 3.5em;
                     padding: 0em .8em;
 
                     text-decoration:none;
@@ -1013,7 +1022,7 @@
 
                 .more-audio-options-container > label {
 
-                    height: 2.8em;
+                    height: 3em;
                     padding: 0em .6em;
 
                     display:flex;
