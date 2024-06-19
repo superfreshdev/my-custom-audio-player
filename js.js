@@ -122,6 +122,12 @@
             /* ----------------------------------------------------------------------------- */
             this.audio.addEventListener( 'loadedmetadata' , ()=> {
 
+                /* -------------------------------------------------------- */
+                /* Set Audio Source for Download ( only work if its on the server , because of origin browser blocked )
+                /* if u like i without server u should build own funciton blob ... async
+                /* -------------------------------------------------------- */
+                this.linkDownloadAudio.setAttribute( "href" , this.audio.getAttribute("src") )
+
                 /* -------------------------------------------- */
                 /* Set Duration & Current Time 
                 /* -------------------------------------------- */
@@ -229,7 +235,6 @@
             /* -------------------------------------------------------- */
             /* MouseLeve | Volume Bar 
             /* -------------------------------------------------------- */
-
             this.volumeBtn.addEventListener( 'mouseleave' , ()=> {
 
                 this.volumeBarContainer.style.display = "none";
@@ -265,6 +270,9 @@
                 this.moreAudioOptionContainer.classList.remove("active");
 
             })
+
+
+           
            
         }
 
@@ -944,10 +952,12 @@
                 /* Download Audio - Div Button 
                 /* ---------------------------------------------- */
                 
-                .download-audio-div-btn {
+                .download-audio-link {
 
                     height: 2.6em;
                     padding: 0em .8em;
+
+                    text-decoration:none;
 
                     display:flex;
                     align-items:center;
@@ -966,11 +976,11 @@
                     transition: .4s all ease;
                 }
 
-                .download-audio-div-btn:hover { 
+                .download-audio-link:hover { 
                     background-color:#767676;   
                 }
 
-                .download-audio-div-btn > img {
+                .download-audio-link > img {
 
                     height: .8em;
                     width: .9em;
@@ -1055,7 +1065,7 @@
 
             </div>
 
-            <a href="media/blamless.mp3" download>Blameless Downlaod </a>
+            
 
  
             <div class="audio-player">
@@ -1158,12 +1168,12 @@
                                 <!-- Download Audio - Button                    -->
                                 <!-- ------------------------------------------ -->
 
-                                <div class="download-audio-div-btn">
+                                <a href="" class="download-audio-link" download>
 
                                     <img src="media/download-icon.png" alt="img">
                                     <div>Download</div>
                             
-                                </div>
+                                </a>
 
                                 <!-- ------------------------------------------ -->
                                 <!-- Speed Audio Sets - Labels                  -->
@@ -1278,7 +1288,7 @@
             this.moreAudioOptionContainer = this.shadowRoot.querySelector(".more-audio-options-container");
 
             /* Downlod Audio Div ( Button ) */
-            this.btnDownloadAudio = this.shadowRoot.querySelector(".btn-download-audio");
+            this.linkDownloadAudio = this.shadowRoot.querySelector(".download-audio-link");
 
             /* Speed Inputs & Labels */
             this.speedInputs = this.shadowRoot.querySelectorAll("input[name='audio-speed']");
