@@ -542,18 +542,15 @@
 
                 }
 
-                .header-audio-player {
-
-                    display:grid;
-                    align-items:center;
-                    grid: auto / 1fr auto;
-                }
 
                 .audio-handling-container {
 
+                    padding-bottom: 1em;
+
                     display:flex;
                     align-items:center;
-                    column-gap: .3em;
+                    justify-content: flex-end;
+                    column-gap: .4em;
                 }
 
                 .btn-audio-handling {
@@ -571,18 +568,20 @@
                     background-color:#E6E6E6;
                 }
 
-                .audio-name {
+                input.audio-name {
 
                     height: 2em;
                     padding: 0em .8em;
+
+                    width: 100px;
+                    
                     color:#707070;
-
-                    display:flex;
-                    align-items:center;
-
                     background-color: #f1f3f4;
 
                     border-radius: .4em;
+
+
+                    cursor:vertical-text;
                 }
 
                 /* ---------------------------------------------------------------------- */
@@ -873,7 +872,7 @@
                 }
 
                 .download-audio-div-btn:hover { 
-                    background-color:#404040;   
+                    background-color:#767676;   
                 }
 
                 .download-audio-div-btn > img {
@@ -935,41 +934,35 @@
             this.shadowRoot.innerHTML = `
             ${this.style()}
             
-            <!-- <input type="text" size="15" class="audio-name" value=""> -->
-            <!-- <div class="audio-name"></div> -->
-
-            <div class="header-audio-player">
-
-
                 <!-- Depracted - better solution build own way with input -->
-                <marquee class="audio-name" direction="left"
+                <!-- 
+                    <marquee class="audio-name" direction="left"
                     behavior="scroll"
                     scrollamount="3"
                     scrolldelay="1"
                     >
                 </marquee>
+                -->
 
-                <div class="audio-handling-container">
+            <div class="audio-handling-container">
 
-                    <label class="btn-audio-handling">
-                        Repeat
-                    </label>
+                <label class="btn-audio-handling">
+                    Repeat
+                </label>
 
-                    <label class="btn-audio-handling">
-                        Autoplay
-                    </label>
+                <label class="btn-audio-handling">
+                    Autoplay
+                </label>
 
-                    <label class="btn-audio-handling">
-                        Infinity(A)
-                    </label>
-
-                </div>
-
+                <label class="btn-audio-handling">
+                    Infinity(A)
+                </label>
 
             </div>
-            
 
-           
+
+            <input type="text" class="audio-name" value="" readonly disabled>           
+            
                  
             <div class="audio-player">
 
@@ -1172,7 +1165,7 @@
             /* Get Defined Attributes 
             /* ------------------------------------------- */
 
-            this.titleElement.textContent = this.attributes.getNamedItem('src')
+            this.titleElement.value = this.attributes.getNamedItem('src')
             ? this.attributes.getNamedItem('title').value ?? 'untitled'
             : 'No Audio Source Provided';
 
