@@ -917,7 +917,7 @@
 
                 .more-audio-options-container {
 
-                    font-size: .9em;
+                    font-size: .95em;
 
                     min-width: 0px;
                     max-height: 0px;
