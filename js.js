@@ -536,30 +536,7 @@
                 }
 
 
-                .audio-handling-container {
-
-                    padding-bottom: 1em;
-
-                    display:flex;
-                    align-items:center;
-                    justify-content: flex-end;
-                    column-gap: .4em;
-                }
-
-                .btn-audio-handling {
-
-                    height: 2em;
-
-                    padding: 0em .8em;
-
-                    display:flex;
-                    align-items:center;
-                    column-gap: .3em;
-
-                    border-radius: .4em;
-
-                    background-color:#E6E6E6;
-                }
+               
 
                 /* ---------------------------------------------------------------------- */
                 /* Audio Player 
@@ -1070,21 +1047,7 @@
                 </marquee>
                 -->
 
-            <div class="audio-handling-container">
-
-                <label class="btn-audio-handling">
-                    Repeat
-                </label>
-
-                <label class="btn-audio-handling">
-                    Autoplay
-                </label>
-
-                <label class="btn-audio-handling">
-                    Infinity(A)
-                </label>
-
-            </div>
+            
 
             
 

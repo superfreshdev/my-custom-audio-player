@@ -28,28 +28,85 @@
             <source src="media/blamless.mp3">
         </audio>
 
-        <br><br>
+    
+    </div>
 
-        <button>
-            Hallo
-        </button>
+    <br><br>
 
-        <!-- <audio preload="none" controls>
-            <source src="Charlie Simpson - I See You (Official Video).mp3">
-        </audio>
+    <!-- ------------------------------------------------------------- -->
+    <!-- Audio Handling Container                                      -->
+    <!-- ------------------------------------------------------------- -->
 
-        <audio preload="none" controls>
-            <source src="The Box (VIOLIN VERSION) DSharp x Ezinma _ Roddy Ricch.mp3">
-        </audio>  -->
+    <div class="audio-handling-container">
 
+        <!-- -------------------------------------------------------- -->
+        <!-- Audio Prev/Next Container -->
+        <!-- -------------------------------------------------------- -->
+        <div class="audio-prev-next-container">
+
+            <div class="audio-max-files-container">
+                <div>01</div>
+                <div>/</div>
+                <div>16</div>
+            </div>
+
+            <button type="button" class="btn-prev-next">
+                <img src="media/audio-prev-next.png" alt="img">
+            </button>
+
+            <button type="button" class="btn-prev-next">
+                <img src="media/audio-prev-next.png" alt="img">
+            </button>
+
+        </div>
+
+       
+        <!-- -------------------------------------------------------- -->
+        <!-- Audio General Sets Container -->
+        <!-- -------------------------------------------------------- -->
+        <div class="audio-general-sets-container">
+
+            <input id="chk-repeat-audio-cardw" type="checkbox">
+            <label for="chk-repeat-audio-cardw" class="lbl-general-audio-set">
+
+                <img src="media/repeat-grey.png" alt="img">
+                <div>Repeat</div>
+            
+            </label>
+
+            <input id="chk-autoplay-audio-cardw" type="checkbox">
+            <label for="chk-autoplay-audio-cardw" class="lbl-general-audio-set">
+
+                <img src="media/autoplay-grey.png" alt="img">
+                <div>Autoplay</div>
+                
+            </label>
+
+            <input id="chk-infinity-audio-cardw" type="checkbox">
+            <label for="chk-infinity-audio-cardw" class="lbl-general-audio-set">
+
+                <img src="media/infinity-grey.png" alt="img">
+                <div>Infinity(A)</div>
+                
+            </label>
+
+        </div>
+
+      
 
     </div>
+
+    <audio-player src="media/sha3.mp3" title="SHAMAN - Я РУССКИЙ"></audio-player>
+
+    
+
+    <br><br>
 
     <div class="info-container">
 
         <div class="green-header"> Custom Audio Player 🤤 </div>
 
-        <audio-player src="media/sha3.mp3"></audio-player>
+       
 
         <br><br>
 
@@ -80,15 +137,6 @@
 
 
     </div>
-
-    
-
-
-    <!-- <p>Charli Simpson - Audio Player </p>
-    <br>
-
-    <audio-player src="blamless.mp3"></audio-player>
- -->
 
 
     

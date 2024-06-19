@@ -4,7 +4,7 @@ body {
     background-color: rgb(255, 255, 255);
 
     display: grid;
-    row-gap: 2em; 
+    row-gap: 0em; 
 
     /* margin: 0; */
 
@@ -35,20 +35,178 @@ body {
     
 
 
+/* ----------------------------------------------------------------- */
+/* Audio Handling Container
+/* ----------------------------------------------------------------- */
+
+.audio-handling-container {
+
+    /* height: 4em; */
+
+    padding: 0em 0em .3em 0em;
+
+    /* background-color: #f1f3f4; */
+
+    display:flex;
+    
+    align-items:center;
+    justify-content: space-between;
+   
+}
+
+/* ----------------------------------------------------------------- */
+/* Audio Prev & Next Container
+/* ----------------------------------------------------------------- */
+
+.audio-prev-next-container {
+
+    display: flex;
+    align-items: center;
+    column-gap: .3em;
+
+}
+
+.audio-max-files-container {
+
+    font-size: .8em;
+    font-weight: bold;
+
+    width: 3.5em;
+    height: 2em;
+
+    padding: 0em .3em;
 
 
+    border-radius: .4em;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: .1em;
 
+    background-color: rgb(198, 198, 198);
 
-/* ------------------------------------------- */
-/* Custom Audio Player 
-/* ------------------------------------------- */
+   
+}
 
-/* dont work !!! */
-.audio-player {
+.btn-prev-next {
 
-    background-color: green;
+    border: 0;
+
+    height: 2em;
+    padding: 0em .8em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color:#E6E6E6;
+
+    border-radius: .4em;
+
+    cursor: pointer;
+
+    transition: all .4s ease;
+}
+
+.btn-prev-next:hover {
+
+    background-color: rgb(167, 167, 167);
 }
 
 
+.audio-prev-next-container > button:nth-of-type(1) > img {
+
+    transform: rotate(180deg);
+
+}
+
+.btn-prev-next > img {
+
+    height: .8em;
+}
+
+
+
+
+
+/* ----------------------------------------------------------------- */
+/* Audio General Sets Container
+/* ----------------------------------------------------------------- */
+
+.audio-general-sets-container {
+
+    font-size: .9em;
+
+    display: flex;
+    align-items: center;
+    column-gap: .3em;
+
+}
+
+.audio-general-sets-container > input { display: none; }
+
+.audio-general-sets-container > input:checked + label {
+
+    background-color: #FF8E8E;
+
+}
+
+/* ----------------------------------------------------------------- */
+/* Label - General Audio Set 
+/* ----------------------------------------------------------------- */
+
+.lbl-general-audio-set {
+
+    height: 2em;
+
+    padding: 0em .8em;
+
+    display:flex;
+    align-items:center;
+    column-gap: .3em;
+
+    border-radius: .4em;
+
+    background-color:#E6E6E6;
+
+    transition: all .4s ease;
+
+    cursor: pointer;
+}
+
+.lbl-general-audio-set:hover {
+
+    background-color: rgb(167, 167, 167);
+
+}
+
+.lbl-general-audio-set > img {
+
+    height: .8em;
+}
+
+/* Mobile First */
+.lbl-general-audio-set > div:nth-of-type(1) {
+
+    display: none;
+}
+
+
+/* ---------------------------------------------------------- */
+/* Responsive 
+/* ---------------------------------------------------------- */
+
+@media (min-width: 467px) {
+
+
+    /* ----------------------------------------------------- */
+    /* Audio General Sets Container 
+     /* ----------------------------------------------------- */
+
+    .lbl-general-audio-set > div:nth-of-type(1) { display: block; }
+
+        
+    
+}
 
