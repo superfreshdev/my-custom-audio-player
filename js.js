@@ -488,6 +488,7 @@
         /* ----------------------------------------------------- */
         seekTo( value ) {
             this.audio.currentTime = value;
+   
         }
 
         /* ----------------------------------------------------- */
@@ -496,6 +497,8 @@
         updateAudioTime() {
             this.progressBar.value = this.audio.currentTime;
             this.currentTimeEl.textContent = this.getTimeString(this.audio.currentTime);
+
+            this.progressBar.style.background = `linear-gradient(to right, #404040 ${ (this.audio.currentTime / this.audio.duration) * 100 }%, #c1c2c3 ${ (this.audio.currentTime / this.audio.duration) * 100 }%)`;
         }
 
        
@@ -732,10 +735,40 @@
 
                 } 
 
+                /* --------------------------------------------------- */
+                /* Thumb Effects by Focus / Clicking  */
+                /* --------------------------------------------------- */
+
                 input[type=range]:focus::-webkit-slider-runnable-track {
                     background: #c1c2c3;
                     border-radius:.6em;
                 }
+
+                /* Chrome & Co */
+                input[type="range"]::-webkit-slider-thumb:hover {
+                    box-shadow: 0 0 0 3px rgba(149, 149, 149  , .8)
+                }
+
+                input[type="range"]:active::-webkit-slider-thumb {
+                    box-shadow: 0 0 0 5px rgba(149, 149, 149  , 1)
+                }
+
+                input[type="range"]:focus::-webkit-slider-thumb {
+                    box-shadow: 0 0 0 5px rgba(149, 149, 149  , 1)
+                }
+
+                /* Firefox */
+
+                input[type="range"]::-moz-range-thumb:hover {
+                    box-shadow: 0 0 0 3px rgba(149, 149, 149  , .8)
+                }
+                input[type="range"]:active::-moz-range-thumb {
+                    box-shadow: 0 0 0 5px rgba(149, 149, 149  , 1)
+                }
+                input[type="range"]:focus::-moz-range-thumb {
+                    box-shadow: 0 0 0 5px rgba(149, 149, 149  , 1) 
+                }
+
 
                 /* --------------------------------------- */
                 /* Thumb - Progresbar 
@@ -744,7 +777,7 @@
                 ::-webkit-slider-thumb {
 
                     -webkit-appearance: none;
-                     
+                   
 
                     height: 15px;
                     width: 15px;
@@ -1177,7 +1210,7 @@
 
             
                                 <!-- ------------------------------------------ -->
-                                <!-- Download Audio - Button                    -->
+                                <!-- Download Audio - Button  https://plainenglish.io/blog/how-to-download-a-file-using-javascript-fec4685c0a22                  -->
                                 <!-- ------------------------------------------ -->
 
                                 <a href="" class="download-audio-link" download>
