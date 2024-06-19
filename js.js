@@ -225,18 +225,21 @@
             /* -------------------------------------------------------- */
             this.volumeBtn.addEventListener( 'click' , ()=> {
 
-                this.volumeBar.style.display = "block";
-                this.volumeBtn.querySelector("img").style.display = "none";
+                this.volumeBarContainer.style.display = "flex";
+                
+                // this.volumeBtn.querySelector("img").style.display = "none";
+
             })
 
             /* -------------------------------------------------------- */
-            /* Focusout | Volume Bar 
+            /* MouseLeve | Volume Bar 
             /* -------------------------------------------------------- */
-            this.volumeBar.addEventListener( 'focusout' , ()=> {
 
-                this.volumeBar.style.display = "none";
+            this.volumeBtn.addEventListener( 'mouseleave' , ()=> {
 
-                this.volumeBtn.querySelector("img").style.display = "block";
+                this.volumeBarContainer.style.display = "none";
+
+                // this.volumeBtn.querySelector("img").style.display = "block";
             
             })
 
@@ -462,6 +465,7 @@
             
             if (this.gainNode) {
                 this.gainNode.gain.value = this.volume;
+                this.volumeValueInfo.innerText = Math.round(Number( this.volumeBar.value * 100)) + " %";
             }
 
 
@@ -584,7 +588,7 @@
 
                     display:grid;
                     grid: 1fr auto / 1fr;
-                    row-gap: .4em;
+                    
                    
                     background-color: #f1f3f4;
 
@@ -609,6 +613,7 @@
 
                     height: 2em;
                     padding: 1px .8em 0em .3em;
+                    margin-bottom: .4em;
 
                     width:100%;
 
@@ -741,7 +746,7 @@
 
                     height: 15px;
                     width: 15px;
-                    background-color: #f50;
+                    background-color: #404040;
                     border-radius: 50%;
                     border: none;
                     transition: .2s ease-in-out;
@@ -760,9 +765,8 @@
                 }
 
                 /* ---------------------------------------- */
-                /* Volume Bar  
+                /* Volume - Button   
                 /* ---------------------------------------- */
-
 
                 #volume-bar-btn > img {
 
@@ -770,24 +774,70 @@
                     padding-left: 2px;
                 }
 
+                /* ---------------------------------------- */
+                /* Volume Bar Container   
+                /* ---------------------------------------- */
+
+                .volume-bar-container {
+
+                    position:absolute;
+                    bottom:0;
+                    right:0;
+
+                    padding: 0em .8em;
+                    
+                    height: 42px;
+                   
+                    display:flex;
+                    column-gap: 1em;
+                    align-items:center;
+                    justify-content:flex-end;
+
+                    border-radius: .4em;
+                    background-color: #787878;
+
+                    display:none;
+
+                }
+
+                .volume-value-info {
+
+                    font-size: 16px;
+                    font-weight:bold;
+
+
+                    min-width: 3.8em;
+                    max-width: 3.8em;
+                    padding: .3em .3em;
+
+                    color: #f1f3f4;
+                    background-color:#404040;
+                    border-radius: .4em;
+
+                }
+
+                /* ---------------------------------------- */
+                /* Volume Bar  
+                /* ---------------------------------------- */
+
                 .volume-bar {
                 
                     appearance: none;
 
-                    position:relative;
-                    bottom:3em;
-
-                    width:100px;
+                    
+                    
+                    width: 80px;
                     height:10px;
+
 
                     background-color:#c1c2c3;
                     border-radius:.6em;
 
-                    transform: rotate(-90deg); 
+                    
 
                     cursor: pointer;
 
-                    display: none;
+                    /* display: none;  transform: rotate(-90deg);*/
 
                 } 
 
@@ -811,6 +861,7 @@
                     transition: .2s ease-in-out;
                 } */
 
+               
 
                 /* ------------------------------------------------------------- */
                 /* Button - More Option Container 
@@ -1062,7 +1113,14 @@
                         <button class="def-btn-audio sets-btn" id="volume-bar-btn">
 
                             <img src="media/volumen.png" alt="img">
-                            <input type="range" min="0" max="2" step="0.01" value="${this.volume}" class="volume-bar">                      
+
+                            <div class="volume-bar-container">
+
+                                <div class="volume-value-info">${this.volume*100} %</div>     
+                                <input type="range" min="0" max="2" step="0.01" value="${this.volume}" class="volume-bar">   
+                                 
+                                
+                            </div>
 
                         </button>
 
@@ -1185,7 +1243,12 @@
             /* ------------------------------------------- */
 
             this.volumeBtn = this.shadowRoot.getElementById("volume-bar-btn");
+
+            this.volumeBarContainer = this.shadowRoot.querySelector('.volume-bar-container');
+           
+            this.volumeValueInfo = this.shadowRoot.querySelector('.volume-value-info')
             this.volumeBar = this.shadowRoot.querySelector('.volume-bar')
+           
             
             /* ------------------------------------------- */
             /* More Option Audio 
