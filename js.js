@@ -80,10 +80,11 @@
               this.audio.setAttribute(name, value ?? '') 
 
             } else {
-
+   
               this.audio.removeAttribute(name);
             }
           
+            
 
         }
         
@@ -568,21 +569,7 @@
                     background-color:#E6E6E6;
                 }
 
-                input.audio-name {
-
-                    height: 2em;
-                    padding: 0em .8em;
-
-                    width: 100px;
-                    
-                    color:#707070;
-                    background-color: #f1f3f4;
-
-                    border-radius: .4em;
-
-
-                    cursor:vertical-text;
-                }
+              
 
                 /* ---------------------------------------------------------------------- */
                 /* Audio Player 
@@ -595,15 +582,63 @@
 
                     padding: .8em .6em;
 
-                    display:flex;
-                    align-items:center;
-                    justify-content:space-between;
-                    column-gap:.6em;
-                
+                    display:grid;
+                    grid: 1fr auto / 1fr;
+                    row-gap: .4em;
+                   
                     background-color: #f1f3f4;
 
                     border-radius: .4em;
                     
+                }
+
+                /* ------------------------------------------------------------- */
+                /*  Audio Title Container 
+                /* ------------------------------------------------------------- */
+
+                .audio-title-container {
+
+                    display:flex;
+                    
+                }
+
+                input.audio-name {
+
+                    /* Deleting default input text styles */
+                    border: 0px;
+
+                    height: 2em;
+                    padding: 1px .8em 0em .3em;
+
+                    width:100%;
+
+                    
+                    color:#707070;
+                    background-color: #f1f3f4;
+                    /*background-color: #f1f3f4;
+                    background-color:red;
+                    background-color: #FF8E8E;
+                    background-color:#E6E6E6;
+                    background-color:#F0F0F0;
+                    background-color: #CDCDCD;*/
+
+
+                    border-radius: .4em;
+
+                    /*cursor:grab;*/
+                }
+                                
+                /* ------------------------------------------------------------- */
+                /*  Audio Container 
+                /* ------------------------------------------------------------- */
+
+                .audio-container {
+
+                    display:flex;
+                    align-items:center;
+                    justify-content:space-between;
+                    column-gap:.6em;
+
                 }
 
                 /* ------------------------------------------------------------- */
@@ -861,7 +896,7 @@
 
                     font-weight:bold;
 
-                    border-radius: .4em .4em 0em 0em;
+                    border-radius: .4em 0em 0em 0em;
 
                     color:white;
                     background-color: #363636;
@@ -960,144 +995,152 @@
 
             </div>
 
-
-            <input type="text" class="audio-name" value="" readonly disabled>           
-            
-                 
+ 
             <div class="audio-player">
 
                 <audio style="display:none;"></audio>
 
-
-               
-                    
                 <!-- ------------------------------------------------------- -->
-                <!--  [1/2] - Info Audio Container -->
+                <!-- Audio Title Container  -->
                 <!-- ------------------------------------------------------- -->
+                <div class="audio-title-container">
+                    <input type="text" class="audio-name" value="" readonly disabled> 
+                </div>
 
-                <div class="info-audio-container">
-               
+                <!-- ------------------------------------------------------- -->
+                <!-- Audio Container  -->
+                <!-- ------------------------------------------------------- -->
+                <div class="audio-container">
+
+
                     <!-- ------------------------------------------------------- -->
-                    <!-- Button - Play/Stop -->
+                    <!--  [1/2] - Info Audio Container -->
                     <!-- ------------------------------------------------------- -->
 
-                    <button class="def-btn-audio pause-btn" type="button">
-                        <img src="media/play-taste.png" class="img-action" alt="img">
-                    </button>
+                    <div class="info-audio-container">
+                
+                        <!-- ------------------------------------------------------- -->
+                        <!-- Button - Play/Stop -->
+                        <!-- ------------------------------------------------------- -->
 
-                    <!-- ------------------------------------------------------- -->
-                    <!-- Progress Indicator                                      -->
-                    <!-- ------------------------------------------------------- -->
+                        <button class="def-btn-audio pause-btn" type="button">
+                            <img src="media/play-taste.png" class="img-action" alt="img">
+                        </button>
 
-                    <div class="progress-indicator">
+                        <!-- ------------------------------------------------------- -->
+                        <!-- Progress Indicator                                      -->
+                        <!-- ------------------------------------------------------- -->
 
-                        <div class="info-progress-bar">
-                            <div class="current-time">0:00</div>
-                            <div> / </div>
-                            <div class="duration">0:00</div>
-                            <div class="speed-info">-</div> 
+                        <div class="progress-indicator">
+
+                            <div class="info-progress-bar">
+                                <div class="current-time">0:00</div>
+                                <div> / </div>
+                                <div class="duration">0:00</div>
+                                <div class="speed-info">-</div> 
+                            </div>
+
+                            <!-- ------------------------------------------------------- -->
+                            <!-- Progress Bar ( input range )                            -->
+                            <!-- ------------------------------------------------------- -->
+                            <input class="progress-bar" type="range" max="100" value="0" >
+                            
                         </div>
 
+                    </div>
+
+                    <!-- ------------------------------------------------------- -->
+                    <!-- [2/2] - Sets Audio Container -->
+                    <!-- ------------------------------------------------------- -->
+                    
+                    <div class="sets-audio-container">
+
                         <!-- ------------------------------------------------------- -->
-                        <!-- Progress Bar ( input range )                            -->
+                        <!-- Volume Bar - Button                                     -->
                         <!-- ------------------------------------------------------- -->
-                        <input class="progress-bar" type="range" max="100" value="0" >
+
+                        <button class="def-btn-audio sets-btn" id="volume-bar-btn">
+
+                            <img src="media/volumen.png" alt="img">
+                            <input type="range" min="0" max="2" step="0.01" value="${this.volume}" class="volume-bar">                      
+
+                        </button>
+
+                    
+                        <!-- ------------------------------------------ -->
+                        <!-- More Audio Options - Button                -->
+                        <!-- ------------------------------------------ -->
                         
+                        <button class="def-btn-audio sets-btn" id="btn-more-audio-options">
+                        
+                            <img src="media/punkte.png" alt="img">
+
+                            <!-- -------------------------------------------------------------- -->
+                            <!-- Choose More Audio Options - List Container                     -->
+                            <!-- -------------------------------------------------------------- -->
+                            <div class="more-audio-options-container">
+
+            
+                                <!-- ------------------------------------------ -->
+                                <!-- Download Audio - Button                    -->
+                                <!-- ------------------------------------------ -->
+
+                                <div class="download-audio-div-btn">
+
+                                    <img src="media/download-icon.png" alt="img">
+                                    <div>Download</div>
+                            
+                                </div>
+
+                                <!-- ------------------------------------------ -->
+                                <!-- Speed Audio Sets - Labels                  -->
+                                <!-- ------------------------------------------ -->
+                                <!-- radio-audio-speed -->
+
+                                <input id="speed-0-5" type="radio" name="audio-speed" value="0.50">
+                                <label for="speed-0-5"> x 0,50 </label>
+                                
+                                <input id="speed-0-75" type="radio" name="audio-speed" value="0.75">
+                                <label for="speed-0-75">x 0,75 </label> 
+                                    
+                                <input checked id="speed-1" type="radio" name="audio-speed" value="1.0">
+                                <label for="speed-1">
+                                    Normal
+                                </label>
+
+                                <input id="speed-1-25" type="radio" name="audio-speed" value="1.25">
+                                <label for="speed-1-25">
+                                    x 1,25 
+                                </label>
+
+                                <input id="speed-1-50" type="radio" name="audio-speed" value="1.50">
+                                <label for="speed-1-50">
+                                    x 1,50 
+                                </label>
+
+                                <input id="speed-1-75" type="radio" name="audio-speed" value="1.75">
+                                <label for="speed-1-75">
+                                    x 1,75 
+                                </label>
+
+                                <input id="speed-2" type="radio" name="audio-speed" value="2.0">
+                                <label for="speed-2">
+                                    x 2,0 
+                                </label>
+
+                                <input id="speed-2-50" type="radio" name="audio-speed" value="2.50">
+                                <label for="speed-2-50">
+                                    x 2,50 
+                                </label>
+
+                                
+
+                            </div>
+                        </button>
                     </div>
 
                 </div>
-
-                <!-- ------------------------------------------------------- -->
-                <!-- [2/2] - Sets Audio Container -->
-                <!-- ------------------------------------------------------- -->
                 
-                <div class="sets-audio-container">
-
-                    <!-- ------------------------------------------------------- -->
-                    <!-- Volume Bar - Button                                     -->
-                    <!-- ------------------------------------------------------- -->
-
-                    <button class="def-btn-audio sets-btn" id="volume-bar-btn">
-
-                        <img src="media/volumen.png" alt="img">
-                        <input type="range" min="0" max="2" step="0.01" value="${this.volume}" class="volume-bar">                      
-
-                    </button>
-
-                
-                    <!-- ------------------------------------------ -->
-                    <!-- More Audio Options - Button                -->
-                    <!-- ------------------------------------------ -->
-                    
-                    <button class="def-btn-audio sets-btn" id="btn-more-audio-options">
-                    
-                        <img src="media/punkte.png" alt="img">
-
-                        <!-- -------------------------------------------------------------- -->
-                        <!-- Choose More Audio Options - List Container                     -->
-                        <!-- -------------------------------------------------------------- -->
-                        <div class="more-audio-options-container">
-
-         
-                            <!-- ------------------------------------------ -->
-                            <!-- Download Audio - Button                    -->
-                            <!-- ------------------------------------------ -->
-
-                            <div class="download-audio-div-btn">
-
-                                <img src="media/download-icon.png" alt="img">
-                                <div>Download</div>
-                           
-                            </div>
-
-                            <!-- ------------------------------------------ -->
-                            <!-- Speed Audio Sets - Labels                  -->
-                            <!-- ------------------------------------------ -->
-                            <!-- radio-audio-speed -->
-
-                            <input id="speed-0-5" type="radio" name="audio-speed" value="0.50">
-                            <label for="speed-0-5"> x 0,50 </label>
-                            
-                            <input id="speed-0-75" type="radio" name="audio-speed" value="0.75">
-                            <label for="speed-0-75">x 0,75 </label> 
-                                
-                            <input checked id="speed-1" type="radio" name="audio-speed" value="1.0">
-                            <label for="speed-1">
-                                Normal
-                            </label>
-
-                            <input id="speed-1-25" type="radio" name="audio-speed" value="1.25">
-                            <label for="speed-1-25">
-                                x 1,25 
-                            </label>
-
-                            <input id="speed-1-50" type="radio" name="audio-speed" value="1.50">
-                            <label for="speed-1-50">
-                                x 1,50 
-                            </label>
-
-                            <input id="speed-1-75" type="radio" name="audio-speed" value="1.75">
-                            <label for="speed-1-75">
-                                x 1,75 
-                            </label>
-
-                            <input id="speed-2" type="radio" name="audio-speed" value="2.0">
-                            <label for="speed-2">
-                                x 2,0 
-                            </label>
-
-                            <input id="speed-2-50" type="radio" name="audio-speed" value="2.50">
-                            <label for="speed-2-50">
-                                x 2,50 
-                            </label>
-
-                            
-
-                        </div>
-
-                </div>
-             
- 
             </div>
 
             `;
@@ -1108,7 +1151,7 @@
 
             this.audio = this.shadowRoot.querySelector('audio');
 
-            // ? 
+            this.audioTitleEl = this.shadowRoot.querySelector('.audio-title-container');
             this.titleElement = this.shadowRoot.querySelector('.audio-name');
 
             
@@ -1165,9 +1208,38 @@
             /* Get Defined Attributes 
             /* ------------------------------------------- */
 
-            this.titleElement.value = this.attributes.getNamedItem('src')
-            ? this.attributes.getNamedItem('title').value ?? 'untitled'
-            : 'No Audio Source Provided';
+            if(  this.attributes.getNamedItem('src') != null ) {
+
+                this.titleElement.value = this.attributes.getNamedItem('src')
+
+                if( this.attributes.getNamedItem('title') != null ) {
+
+                    this.titleElement.value = this.attributes.getNamedItem('title').value;
+                    
+                } else {
+                    
+                    this.audioTitleEl.style.display = "none";
+                } 
+
+            } else {
+
+                console.log( "No Audio Sorce Provided" )
+            }
+
+           
+            
+           
+
+
+            /*else {
+
+                this.titleElement.value = this.attributes.getNamedItem('src')
+                ? this.attributes.getNamedItem('title').value ?? 'untitled'
+                : 'No Audio Source Provided';
+
+            } */
+
+          
 
             // if rendering or re-rendering all audio attributes need to be reset
             for (let i = 0; i < this.attributes.length; i++) {
