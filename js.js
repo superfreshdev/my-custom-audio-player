@@ -127,6 +127,7 @@
                 /* if u like i without server u should build own funciton blob ... async
                 /* -------------------------------------------------------- */
                 this.linkDownloadAudio.setAttribute( "href" , this.audio.getAttribute("src") )
+                
 
                 /* -------------------------------------------- */
                 /* Set Duration & Current Time 
@@ -142,6 +143,7 @@
 
 
             })
+
 
             /* -------------------------------------------------------- */
             /* Click | Play / Pause - Button
@@ -261,10 +263,18 @@
                 this.addLabelClickListeners()
             })
 
+            // this.linkDownloadAudio.addEventListener( 'click' , ()=> {
+
+
+            //     console.log(" Download clicked " )
+            //     this.moreAudioOptionContainer.classList.remove("active");
+
+            // })
+            
             /* -------------------------------------------------------- */
             /* Focusout | More Audio Options - Button
             /* -------------------------------------------------------- */
-            this.btnMoreAudioOptions.addEventListener( 'focusout' , ()=> {
+            this.btnMoreAudioOptions.addEventListener( 'mouseleave' , ()=> {
 
                 console.log(" btnMoreAudioOptions =  loose focus" )
                 this.moreAudioOptionContainer.classList.remove("active");
@@ -275,10 +285,6 @@
            
            
         }
-
-
-
-
 
 
 
@@ -355,6 +361,27 @@
            
  
         }
+
+        /* ----------------------------------------------------- */
+        /* Download File by Fetch API blob
+        /* ----------------------------------------------------- */
+        downloadFile( link , filename ) {
+            
+            fetch(link, { method: "get", mode: "no-cors", referrerPolicy: "no-referrer" })
+            .then((res) => res.blob())
+            .then((res) => {
+        
+                this.linkDownloadAudio.setAttribute( "download", filename )
+
+                const href = URL.createObjectURL.apply(res);
+                this.linkDownloadAudio.href = href;
+                this.linkDownloadAudio.click();
+                URL.revokeObjectURL(href);
+            });
+
+        }
+
+
 
         /* ----------------------------------------------------- */
         /* Set Playback Rate 
@@ -1093,6 +1120,8 @@
                     >
                 </marquee>
                 -->
+
+            <a href="media/blamless.mp3" download="file">Blameless.mp3</a> 
 
             <div class="audio-handling-container">
 
