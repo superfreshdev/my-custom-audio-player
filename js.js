@@ -215,11 +215,6 @@
             }, false);
 
 
-
-
-
-
-
             /* -------------------------------------------------------- */
             /* Click | Volume Button 
             /* -------------------------------------------------------- */
@@ -270,10 +265,6 @@
                 this.moreAudioOptionContainer.classList.remove("active");
 
             })
-
-          
-
-     
            
         }
 
@@ -354,34 +345,7 @@
           }
 
            
-
-          
-
-        //    console.log( "[setAudioSpeed] Index setted = " +  this.getCheckedRadioIndex() )
-
-          
-          
-
-
-           // check normal speed mode 
-        //    if( this.speedInputs[ this.getCheckedRadioIndex() ].getAttribute("value") === "" ) {
-
-        //     this.speedAudioInfo.classList.remove("speed-info")
-        //     this.setPlaybackRate(1.0);
-
-        //    } else {
-
-        //     console.log(" SET = " + this.speedInputs[ this.getCheckedRadioIndex() ].getAttribute("value"))
-            
-        //     this.speedAudioInfo.setAttribute( "class" , "speed-info" ) 
-            
-
-
-        //     this.setPlaybackRate(2.0);
-
-           //}
-           
-          
+ 
         }
 
         /* ----------------------------------------------------- */
@@ -390,7 +354,6 @@
         setPlaybackRate( rate ) {
             
             // console.log("[setPlaybackRate] = " + rate )
-
             this.audio.playbackRate = rate;
 
         }
@@ -466,6 +429,38 @@
             if (this.gainNode) {
                 this.gainNode.gain.value = this.volume;
                 this.volumeValueInfo.innerText = Math.round(Number( this.volumeBar.value * 100)) + " %";
+
+                // Update Volume Icon View 
+                if( Math.round(Number( this.volumeBar.value * 100)) == 0 ) {
+
+                    // bigger mute speaker 
+                    this.imgVolume.setAttribute( "src" , "media/volume-mute.png" )
+                    this.imgVolume.style.height = "1.3em";
+
+                    /*padding-top: 0, 4px , rog-gap .3em 0em*/
+                    this.btnViewVolumeContainer.style.paddingTop = "0px";
+                    this.btnViewVolumeContainer.style.rowGap = "0em";
+                    this.volumeValueInfoSmall.style.display = "none";
+
+                } else {
+
+
+                    // btn view volume container 
+                    this.btnViewVolumeContainer.style.paddingTop = "4px";
+                    this.btnViewVolumeContainer.style.rowGap = ".3em";
+                    
+                    // smaller speaker 
+                    this.imgVolume.setAttribute( "src" , "media/volumen.png" )
+                    this.imgVolume.style.height = "1em";
+
+                    // show mini volume % info
+                    this.volumeValueInfoSmall.style.display = "block";
+                    this.volumeValueInfoSmall.innerText = Math.round(Number( this.volumeBar.value * 100)) + "%";
+
+                   
+                }
+                
+
             }
 
 
@@ -765,13 +760,32 @@
                 }
 
                 /* ---------------------------------------- */
-                /* Volume - Button   
+                /* Button - View Volume Container  
                 /* ---------------------------------------- */
 
-                #volume-bar-btn > img {
+                .btn-view-volume-container {
 
-                    height: 1.3em;
+                    padding-top:4px;
+                    display: grid;
+                    justify-items:center;
+                    row-gap: .3em;
+                }
+
+                /* ---------------------------------------- */
+                /* Volume Icon of Button  
+                /* ---------------------------------------- */
+
+                .imgVolume {
+
+                    height: 1em;
+                    /*height: 1.3em; */
                     padding-left: 2px;
+                }
+
+                .btn-volume-value-info {
+
+                    font-size: .8em;
+                    padding-left:1px;
                 }
 
                 /* ---------------------------------------- */
@@ -824,16 +838,11 @@
                 
                     appearance: none;
 
-                    
-                    
                     width: 80px;
                     height:10px;
 
-
                     background-color:#c1c2c3;
                     border-radius:.6em;
-
-                    
 
                     cursor: pointer;
 
@@ -1112,7 +1121,11 @@
 
                         <button class="def-btn-audio sets-btn" id="volume-bar-btn">
 
-                            <img src="media/volumen.png" alt="img">
+                            <div class="btn-view-volume-container">
+                                <img src="media/volumen.png" class="imgVolume" alt="img">
+                                <div class="btn-volume-value-info">${this.volume*100}%</div>
+                            </div>
+                            
 
                             <div class="volume-bar-container">
 
@@ -1242,7 +1255,11 @@
             /* Volume - Button & Volume Bar 
             /* ------------------------------------------- */
 
-            this.volumeBtn = this.shadowRoot.getElementById("volume-bar-btn");
+            this.volumeBtn = this.shadowRoot.getElementById('volume-bar-btn');
+
+            this.btnViewVolumeContainer = this.shadowRoot.querySelector('.btn-view-volume-container')
+            this.imgVolume = this.shadowRoot.querySelector('.imgVolume')
+            this.volumeValueInfoSmall = this.shadowRoot.querySelector('.btn-volume-value-info')
 
             this.volumeBarContainer = this.shadowRoot.querySelector('.volume-bar-container');
            
