@@ -502,7 +502,6 @@
                     border:none;
                     outline:none;
 
-                    border-radius: .4em;
 
                     min-width: 42px;
                     min-height: 42px;
@@ -514,6 +513,8 @@
                     align-items:center;
                     justify-content:center;
 
+                    border-radius: .3em;
+
                     cursor: pointer;
 
                 }
@@ -523,16 +524,14 @@
                 }
 
                 .pause-btn {
-                    background-color:#f1f3f4;
+                    background-color:#E6E6E6;
                 }
 
                 .img-action { height: 1.3em }
 
 
                 .sets-btn {
-
                     background-color: #E6E6E6;
-
                 }
 
 
@@ -544,17 +543,19 @@
 
                 .audio-player {
 
+                    font-size: .9em;
+
                     position:relative;
                     top:0;
 
-                    padding: .8em .6em;
+                    padding: .8em .6em .8em .6em;
 
                     display:grid;
                     grid: 1fr auto / 1fr;
                     
                     background-color: #f1f3f4;
 
-                    border-radius: .4em;
+                    border-radius: 0em 0em .3em .3em;
                     
                 }
 
@@ -575,15 +576,12 @@
 
                     height: 2em;
                     padding: 1px .8em 0em .3em;
-                    margin-bottom: .4em;
-
-                    width:100%;
+                    margin-bottom: .8em;
+                    width:100%;                    
                     
                     color:#707070;
                     background-color: #f1f3f4;
                    
-                    border-radius: .4em;
-
                 }
                                 
                 /* ------------------------------------------------------------- */
@@ -660,7 +658,7 @@
                 .show-speed-info {
 
                     color: #404040;
-                    background-color: #DEDEDE;
+                    background-color:#E6E6E6;
 
                 }
 
@@ -781,16 +779,16 @@
 
                 .btn-volume-value-info {
 
-                    font-size: .8em;
+                    font-size: .85em;
 
-                    width: 3.5em;
-                    padding-left: 2px;
+                    width: 100%;
+                    padding-left: 3px;
 
                     display:flex;
                     align-items:center;
                     justify-content:center;
 
-                   
+                    color:#787878;                   
                     
                 }
 
@@ -822,18 +820,20 @@
 
                 .volume-value-info {
 
-                    font-size: 16px;
-                    font-weight:bold;
-
-
                     min-width: 3.8em;
                     max-width: 3.8em;
                     padding: .3em .3em;
 
-                    color: #f1f3f4;
-                    background-color:#404040;
-                    border-radius: .4em;
+                    font-weight:bold;
 
+                    border-radius: .3em;
+
+                    color: #f1f3f4;
+                    /*background-color:#404040;*/
+                    background-color:#464646;
+                   
+
+                  
                 }
 
                 /* ---------------------------------------- */
@@ -855,28 +855,7 @@
                     /* display: none;  transform: rotate(-90deg);*/
 
                 } 
-
-                /*.volume-bar::-webkit-slider-thumb {
-
-                    height: 25px;
-                    width: 25px;
-                    background-color: #f50;
-                    border-radius: 50%;
-                    border: none;
-                    transition: .2s ease-in-out;
-                }
-              
-                .volume-bar::-moz-range-thumb {
-
-                    height: 15px;
-                    width: 15px;
-                    background-color: #f50;
-                    border-radius: 50%;
-                    border: none;
-                    transition: .2s ease-in-out;
-                } */
-
-               
+   
 
                 /* ------------------------------------------------------------- */
                 /* Button - More Option Container 
@@ -896,7 +875,7 @@
 
                     font-size: .95em;
 
-                    min-width: 0px;
+                    min-width: 10em;
                     max-height: 0px;
                     opacity:0;
                    
@@ -906,12 +885,10 @@
                     right:0;
                     bottom: 0em;
 
-                    min-width: 10em;
-
                     background-image: linear-gradient(to left, #BDBBBE 0%, #9D9EA3 100%), radial-gradient(88% 271%, rgba(255, 255, 255, 0.25) 0%, rgba(254, 254, 254, 0.25) 1%, rgba(0, 0, 0, 0.25) 100%), radial-gradient(50% 100%, rgba(255, 255, 255, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%);
                     background-blend-mode: normal, lighten, soft-light;
 
-                    border-radius: .4em;
+                    border-radius: .3em;
 
                 }
 
@@ -964,7 +941,7 @@
 
                     font-weight:bold;
 
-                    border-radius: .4em 0em 0em 0em;
+                    border-radius: .3em 0em 0em 0em;
 
                     color:white;
                     background-color: #363636;
