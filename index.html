@@ -20,13 +20,12 @@
 
         <div class="red-header"> Google Native Audio Player 👎 </div>
     
-        <audio preload="metadata" controls>
-            <source src="media/crazy-pop-violine.mp3">
+        <audio preload="metadata" src="media/crazy-pop-violine.mp3" title="[Native] - Crazy Pop Violine Audio" id="native-audio" controls>
         </audio>
 
-         <audio preload="none" controls>
+         <!-- <audio preload="none" controls>
             <source src="media/blamless.mp3">
-        </audio>
+        </audio> -->
 
     
     </div>
@@ -36,7 +35,6 @@
     <!-- ------------------------------------------------------------- -->
     <!-- Audio Handling Container                                      -->
     <!-- ------------------------------------------------------------- -->
-
     <div class="audio-handling-container">
 
     
@@ -46,24 +44,24 @@
         <!-- -------------------------------------------------------- -->
         <div class="audio-general-sets-container">
 
-            <input id="chk-repeat-audio-cardw" type="checkbox">
-            <label for="chk-repeat-audio-cardw" class="lbl-general-audio-set">
+            <input id="chk-repeat-audio" type="checkbox">
+            <label for="chk-repeat-audio" class="lbl-general-audio-set">
 
                 <img src="media/repeat-grey.png" class="img-icon-big" alt="img">
                 <div>Repeat</div>
             
             </label>
 
-            <input id="chk-autoplay-audio-cardw" type="checkbox">
-            <label for="chk-autoplay-audio-cardw" class="lbl-general-audio-set">
+            <input id="chk-autoplay-audio" type="checkbox">
+            <label for="chk-autoplay-audio" class="lbl-general-audio-set">
 
                 <img src="media/autoplay-grey.png" class="img-icon-small" alt="img">
                 <div>Autoplay</div>
                 
             </label>
 
-            <input id="chk-infinity-audio-cardw" type="checkbox">
-            <label for="chk-infinity-audio-cardw" class="lbl-general-audio-set">
+            <input id="chk-infinity-audio" type="checkbox">
+            <label for="chk-infinity-audio" class="lbl-general-audio-set">
 
                 <img src="media/infinity-grey.png" class="img-icon-small" alt="img">
                 <div>Infinity(A)</div>
@@ -72,206 +70,48 @@
 
         </div>
 
-          <!-- -------------------------------------------------------- -->
+        <!-- -------------------------------------------------------- -->
         <!-- Audio Prev/Next Container -->
         <!-- -------------------------------------------------------- -->
         <div class="audio-prev-next-container">
 
             <div class="info-number-of-audio-files-container">
-                <div>01</div>
-                <div>/</div>
-                <div>42</div>
+                <div id="js-currentAudioIndex">-</div>
+                <div> / </div>
+                <div id="js-maxAudioIndex">-</div>
             </div>
 
-            <button type="button" class="btn-prev-next">
+            <button type="button" id="btn-audio-prev" class="btn-prev-next">
                 <img src="media/audio-prev-next.png" alt="img">
             </button>
 
-            <button type="button" class="btn-prev-next">
+            <button type="button" id="btn-audio-next" class="btn-prev-next">
                 <img src="media/audio-prev-next.png" alt="img">
             </button>
 
         </div>
 
-      
-
     </div>
-    <!-- title="SHAMAN - Я РУССКИЙ" -->
-    <audio-player src="media/sha3.mp3"></audio-player>
-
-    <br><br>
-
-    <div class="audio-handling-container">
+    <!-- ------------------------------------------------------------- -->
+    <!-- Custom Audio Player                                      -->
+    <!-- ------------------------------------------------------------- -->
+    <audio-player id="custom-audio-player-books"></audio-player>
 
     
-       
-        <!-- -------------------------------------------------------- -->
-        <!-- Audio General Sets Container -->
-        <!-- -------------------------------------------------------- -->
-        <div class="audio-general-sets-container">
 
-            <input id="chk-repeat-audio-cardw" type="checkbox">
-            <label for="chk-repeat-audio-cardw" class="lbl-general-audio-set">
+    <div class="shiggy-container">
 
-                <img src="media/repeat-grey.png" class="img-icon-big" alt="img">
-                <div>Repeat</div>
-            
-            </label>
-
-            <input id="chk-autoplay-audio-cardw" type="checkbox">
-            <label for="chk-autoplay-audio-cardw" class="lbl-general-audio-set">
-
-                <img src="media/autoplay-grey.png" class="img-icon-small" alt="img">
-                <div>Autoplay</div>
-                
-            </label>
-
-            <input id="chk-infinity-audio-cardw" type="checkbox">
-            <label for="chk-infinity-audio-cardw" class="lbl-general-audio-set">
-
-                <img src="media/infinity-grey.png" class="img-icon-small" alt="img">
-                <div>Infinity(A)</div>
-                
-            </label>
-
-        </div>
-
-          <!-- -------------------------------------------------------- -->
-        <!-- Audio Prev/Next Container -->
-        <!-- -------------------------------------------------------- -->
-        <div class="audio-prev-next-container">
-
-            <div class="info-number-of-audio-files-container">
-                <div>01</div>
-                <div>/</div>
-                <div>42</div>
-            </div>
-
-            <button type="button" class="btn-prev-next">
-                <img src="media/audio-prev-next.png" alt="img">
-            </button>
-
-            <button type="button" class="btn-prev-next">
-                <img src="media/audio-prev-next.png" alt="img">
-            </button>
-
-        </div>
-
-      
-
-    </div>
-   
-    <audio-player src="media/Charlie Simpson - I See You (Official Video).mp3" title="Charlie Simpson - I See You" ></audio-player>
-
-    <br><br>
-
-    <div class="audio-handling-container">
-
-    
-       
-        <!-- -------------------------------------------------------- -->
-        <!-- Audio General Sets Container -->
-        <!-- -------------------------------------------------------- -->
-        <div class="audio-general-sets-container">
-
-            <input id="chk-repeat-audio-cardw" type="checkbox">
-            <label for="chk-repeat-audio-cardw" class="lbl-general-audio-set">
-
-                <img src="media/repeat-grey.png" class="img-icon-big" alt="img">
-                <div>Repeat</div>
-            
-            </label>
-
-            <input id="chk-autoplay-audio-cardw" type="checkbox">
-            <label for="chk-autoplay-audio-cardw" class="lbl-general-audio-set">
-
-                <img src="media/autoplay-grey.png" class="img-icon-small" alt="img">
-                <div>Autoplay</div>
-                
-            </label>
-
-            <input id="chk-infinity-audio-cardw" type="checkbox">
-            <label for="chk-infinity-audio-cardw" class="lbl-general-audio-set">
-
-                <img src="media/infinity-grey.png" class="img-icon-small" alt="img">
-                <div>Infinity(A)</div>
-                
-            </label>
-
-        </div>
-
-          <!-- -------------------------------------------------------- -->
-        <!-- Audio Prev/Next Container -->
-        <!-- -------------------------------------------------------- -->
-        <div class="audio-prev-next-container">
-
-            <div class="info-number-of-audio-files-container">
-                <div>01</div>
-                <div>/</div>
-                <div>42</div>
-            </div>
-
-            <button type="button" class="btn-prev-next">
-                <img src="media/audio-prev-next.png" alt="img">
-            </button>
-
-            <button type="button" class="btn-prev-next">
-                <img src="media/audio-prev-next.png" alt="img">
-            </button>
-
-        </div>
-
-      
-
-    </div>
-   
-    <audio-player src="media/case.mp3" title="Case - In the Morning - und dies könnte ein Test für ein sehr langen Text sein allerdings verstehe ich das auch wiederum nicht mehr aber es könnte echt lang sein"></audio-player>
-
-
-    <br><br><br>
-
-    <div class="info-container">
-
-        <div class="green-header"> Custom Audio Player 🤤 </div>
-
-       
-
-       
-
-        <br><br>
-
-        <audio-player src="media/13-c-a-r-d-w.ogg" title="Kap.13 - Cafe am Rande der Welt"></audio-player>
-
-        <br><br>
-
-        <audio-player src="media/DSharp - Heartless (Violin Cover) _ The Weeknd.mp3" title="#Dsharp - Heartless - Violin Cover"></audio-player>
-
-        <br><br>
-
-        <audio-player src="media/case.mp3" title="Case - In the Morning - und dies könnte ein Test für ein sehr langen Text sein allerdings verstehe ich das auch wiederum nicht mehr aber es könnte echt lang sein"></audio-player>
-
-        <br><br>
-
-        <audio-player src="media/sha3.mp3" title="SHAMAN - Я РУССКИЙ"></audio-player>
-
-        
-
-
-
-
-        <!-- <audio-player title="Marko Tack 3"></audio-player> -->
-
+        <img src="media/shiggy-break.gif">
 
     </div>
 
-
-    
-    
+ 
     
     <!-- ------------------------------------------------------- -->
     <!-- JS Bindings    -->
     <!-- ------------------------------------------------------- -->
     <script src="js.js"></script>
+    <script src="audio-handlings.js"></script>
 
 </body>
 </html>

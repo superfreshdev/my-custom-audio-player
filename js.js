@@ -1,8 +1,4 @@
 {
-    // https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/playbackRate
-
-  
-
     class AudioPlayer extends HTMLElement {
 
         playing = false;
@@ -10,39 +6,41 @@
         duration = 0;
         volume = 0.4;
 
-        nonAudioAttributes = new Set(['title', 'bar-width', 'bar-gap', 'buffer-percentage']);
-        
         initialized = false;
 
+        nonAudioAttributes = new Set(['title']);
+        
         /* ----------------------------------------------------- */
         /* Constructor
         /* ----------------------------------------------------- */
         constructor() {
-
             super();
 
             // open mode - allow to see the content on the tag in the browser  
-            this.attachShadow( {mode: 'open'});
+            this.attachShadow( {mode: 'open'} );
             this.render();
 
-            this.initializeAudio();
-            this.attachEvents();
+            // this.initializeAudio();
+            // this.attachEvents();
 
         }
 
         /* ----------------------------------------------------- */
         /* Get | Attribute from Custom HTML Tempate
         /* ----------------------------------------------------- */
-        static get observerAttributes() {
-            return ['src', 'title', 'muted', 'crossorigin' , 'loop' , 'preload' ]
+        static get observedAttributes() {
+
+            return [
+
+                'src', 'muted', 'crossorigin' , 'loop' , 'preload', 'autoplay',
+                'title'
+            ];
         }
 
         /* ----------------------------------------------------- */
         /* Get |  Attribute from HTML
         /* ----------------------------------------------------- */
         async attributeChangedCallback( name, oldValue , newValue ) {
-
-            console.log("[attributeChangeCallback]--- " , name , oldValue , newValue )
 
             switch( name ) {
 
@@ -51,11 +49,18 @@
                     this.initialized = false;
                     this.render();
                     this.initializeAudio();
+                   
+                    break;
 
+                case 'title':
+
+                    this.titleElement.value = newValue;
                     break;
 
                 case 'muted':
+
                     // not implemented
+
                     break;
 
                 default:
@@ -77,15 +82,14 @@
             // set it otherwise remove it
             if (this.attributes.getNamedItem(name)) {
 
-              this.audio.setAttribute(name, value ?? '') 
+                // console.log("[Set] = " + name + " || " + value )
 
+              this.audio.setAttribute(name, value ?? '') 
+            
             } else {
    
               this.audio.removeAttribute(name);
             }
-          
-            
-
         }
         
         /* ----------------------------------------------------- */
@@ -116,7 +120,6 @@
         /* ----------------------------------------------------- */
         attachEvents() {
 
-
             /* ----------------------------------------------------------------------------- */
             /* loadedmetadata | Event to load asyn in real time data from audio 
             /* ----------------------------------------------------------------------------- */
@@ -142,6 +145,7 @@
                 this.setAudioSpeed( this.getCheckedRadioIndex( ) );
 
 
+
             })
 
             /* -------------------------------------------------------- */
@@ -163,13 +167,6 @@
             this.audio.addEventListener( 'timeupdate', ()=> {
                 this.updateAudioTime(this.audio.currentTime);
             }) 
-
-
-
-           
-
-
-
 
             /* -------------------------------------------------------- */
             /* ended | Event to handle end of audio
@@ -278,13 +275,12 @@
            
         }
 
-
+       
 
         /* ------------------------------------------------------------------- */
         /* Help Functions 
         /* ------------------------------------------------------------------- */
 
-       
         /* ----------------------------------------------------- */
         /* Get Checked Radio Index 
         /* ----------------------------------------------------- */
@@ -385,7 +381,6 @@
             return this.audio.play();
             
         }
-
     
         /* ----------------------------------------------------- */
         /* Time Style  
@@ -892,7 +887,6 @@
 
                 }
 
-                
                 /* if open mode view container */
                 .more-audio-options-container.active {
                 
@@ -1014,24 +1008,10 @@
             this.shadowRoot.innerHTML = `
             ${this.style()}
             
-                <!-- Depracted - better solution build own way with input -->
-                <!-- 
-                    <marquee class="audio-name" direction="left"
-                    behavior="scroll"
-                    scrollamount="3"
-                    scrolldelay="1"
-                    >
-                </marquee>
-                -->
-
-            
-
-            
-
- 
             <div class="audio-player">
 
-                <audio style="display:none;"></audio>
+                <!-- style="display:none;" -->
+                <audio style="display: none"></audio>
 
                 <!-- ------------------------------------------------------- -->
                 <!-- Audio Title Container  -->
@@ -1039,6 +1019,8 @@
                 <div class="audio-title-container">
                     <input type="text" class="audio-name" value="" readonly disabled> 
                 </div>
+
+                <!--<figcaption class="audio-name"></figcaption>-->
 
                 <!-- ------------------------------------------------------- -->
                 <!-- Audio Container  -->
@@ -1198,16 +1180,12 @@
             this.audioTitleEl = this.shadowRoot.querySelector('.audio-title-container');
             this.titleElement = this.shadowRoot.querySelector('.audio-name');
 
-            
-
-
             /* ------------------------------------------- */
             /* Play/Stop - Button
             /* ------------------------------------------- */
 
             this.playPauseBtn = this.shadowRoot.querySelector('.pause-btn')
             
-          
             /* ------------------------------------------- */
             /* Progress Indicator & Progressbar
             /* ------------------------------------------- */
@@ -1260,49 +1238,60 @@
             /* ------------------------------------------- */
             /* Get Defined Attributes 
             /* ------------------------------------------- */
-
-            if(  this.attributes.getNamedItem('src') != null ) {
-
-                this.titleElement.value = this.attributes.getNamedItem('src')
-
-                if( this.attributes.getNamedItem('title') != null ) {
-
-                    this.titleElement.value = this.attributes.getNamedItem('title').value;
-                    
-                } else {
-                    
-                    this.audioTitleEl.style.display = "none";
-                } 
-
-            } else {
-
-                console.log( "No Audio Sorce Provided" )
-            }
-
-           
             
-           
+            
+            // if( this.attributes.getNamedItem('src') != null ) {
+
+            //         this.titleElement.textContent = this.attributes.getNamedItem('src')
+    
+            //         if( this.attributes.getNamedItem('title') != null ) {
+    
+            //             this.titleElement.value = this.attributes.getNamedItem('title').value;
+                        
+            //         } else {
+                        
+            //             this.audioTitleEl.style.display = "none";
+            //         } 
+    
+            //     } else {
+    
+            //         console.log( "No Audio Sorce Provided" )
+            //     }
+
+                
+    
 
 
-            /*else {
+            // this.titleElement.textContent = this.attributes.getNamedItem('src')
+            // ? this.attributes.getNamedItem('title').value ?? 'untitled'
+            // : 'No Audio Source Provided';
 
-                this.titleElement.value = this.attributes.getNamedItem('src')
-                ? this.attributes.getNamedItem('title').value ?? 'untitled'
-                : 'No Audio Source Provided';
-
-            } */
-
-          
 
             // if rendering or re-rendering all audio attributes need to be reset
             for (let i = 0; i < this.attributes.length; i++) {
                 const attr = this.attributes[i];
                 this.updateAudioAttributes(attr.name, attr.value);
             }
-            
+
             this.attachEvents();
 
 
+
+
+
+            
+            // console.log("Intersannt [title] = " + this.attributes.getNamedItem('title').value )
+            // console.log("Intersannt [src] = " + this.attributes.getNamedItem('src').value )
+
+            // console.log("marko marko " + this.attributes.getNamedItem('src') )
+
+          
+
+
+            
+         
+
+            
         }
        
     }
